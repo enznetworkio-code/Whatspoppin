@@ -170,6 +170,20 @@ footer .logo{color:var(--cy)}
 .hero>div>.rv:nth-child(2){transition-delay:.07s}.hero>div>.rv:nth-child(3){transition-delay:.14s}.hero>div>.rv:nth-child(4){transition-delay:.21s}.hero>div>.rv:nth-child(5){transition-delay:.28s}
 .bento>.rv:nth-child(3n+2),.steps>.rv:nth-child(3n+2),.people>.rv:nth-child(3n+2){transition-delay:.09s}.bento>.rv:nth-child(3n),.steps>.rv:nth-child(3n),.people>.rv:nth-child(3n){transition-delay:.18s}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ---- calmer motion: only things that mean something ---- */
+@keyframes fade{from{opacity:0}}
+@keyframes tick{from{transform:scale(.8)}to{transform:none}}
+#sp{display:none}
+.phone,.chip{animation:none}
+.js .rv{transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}.js .rv.in{transform:none}
+.rv,.rv:nth-child(n){transition-delay:0s!important}
+.ab>*{animation:fade .18s ease both}.ab>:nth-child(n){animation-delay:0s}
+.abar .on svg,.bdg,.fa button.on svg{animation:tick .18s ease-out}
+.tst{animation:fade .2s both}
+.pc:hover{transform:none}
+.card:nth-child(n):hover{transform:none}
+.fm.pop .hb{animation:burst .5s ease-out}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
