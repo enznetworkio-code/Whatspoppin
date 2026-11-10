@@ -397,12 +397,12 @@ bt.disabled=false;bt.textContent='create my account'});
 // ---------- the app (signed in)
 
 // ---------- mini-app: nearby feed + activity
-let ACT=[],actT,PIMG='';
-const pcard=(p,L)=>{const mine=L.some(l=>l._id===ME.uid),own=p.owner===ME.uid,an=String(p.name).startsWith('anon.'),im=String(p.img).startsWith('data:image/jpeg;base64,')?esc(p.img):'';
+let ACT=[],actT,PIMG='',MYP=new Set();
+const pcard=(p,L)=>{const mine=L.some(l=>l._id===ME.uid),own=MYP.has(p._id),an=String(p.name).startsWith('anon.'),im=String(p.img).startsWith('data:image/jpeg;base64,')?esc(p.img):'';
 return `<div class="fp"><div class="fh"><span class="ring ${an?'an':'cy'}"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${esc(p.name)}<small>${ago(p.at)}</small></div><button class="fine" data-a="${own?'dp':'rp'}" data-v="${p._id}">${own?'delete':'report'}</button></div><div class="fm" data-a="lk" data-v="${p._id}"><img src="${im}" alt=""><i class="hb">${ic('heart','f')}</i>${p.text?`<b class="cap">${esc(p.text)}</b>`:''}</div><div class="fa"><button data-a="lk" data-v="${p._id}" data-m="${mine?1:0}" class="${mine?'on':''}">${ic('heart',mine?'f':'')}<span>${L.length}</span></button></div></div>`};
 async function vNearby(){const n=VN;ab('<p class="fine" style="padding:20px 0">loading…</p>');let P=[];
 try{const cut=Date.now()-864e5;P=(await listDocs('posts','orderBy=at%20desc&pageSize=10')).filter(p=>p.at&&+new Date(p.at)>cut)}catch(e){}
-const L=await Promise.all(P.map(p=>listDocs('posts/'+p._id+'/likes','pageSize=100').catch(()=>[])));if(n!==VN)return;
+const L=await Promise.all(P.map(p=>listDocs('posts/'+p._id+'/likes','pageSize=100').catch(()=>[])));try{MYP=new Set((await listDocs('users/'+ME.uid+'/posts','pageSize=100')).map(x=>x._id))}catch(e){}if(n!==VN)return;
 ab(`<div class="hd2"><h3 style="flex:1">nearby</h3><button class="btn sm" data-a="newp">+ post</button></div>
 <div id="np" hidden class="cbox" style="text-align:left"><input id="pf" type="file" accept="image/*" style="font-size:14px;max-width:100%"><img id="pv" hidden alt=""><input class="in" id="pc" placeholder="what’s going on? (optional)" maxlength="140" style="margin:8px 0"><label class="chk" style="margin:4px 0 10px"><input type="checkbox" id="pa" checked><span>post as anon</span></label><button class="btn sm" data-a="mkp" style="width:100%">post it</button></div>
 <p class="fine" style="margin:2px 0 12px">posts from early members. gone after 24 hours.</p>`+(P.length?P.map((p,i)=>pcard(p,L[i])).join(''):'<p class="fine" style="padding:30px 0;text-align:center">nothing posted yet. be the first.</p>'))}
@@ -474,12 +474,12 @@ await commit([W(`circles/${code}/members/${ME.uid}`,{},['at']),W(`users/${ME.uid
 catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t join. try again')}}
 const acts={
 newp:()=>{$('#np').hidden=!$('#np').hidden},
-async mkp(){if(!PIMG)return toast2('pick a photo first');if(!VER)return toast2('verify your email first');const an=$('#pa').checked,name=an?'anon.'+String([...ME.uid].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7)%10000).padStart(4,'0'):ME.username;
-try{await commit([W('posts/'+rand(12),{owner:Fs(ME.uid),name:Fs(name),text:Fs($('#pc').value.trim().slice(0,140)),img:Fs(PIMG)},['at'])]);PIMG='';toast2('posted');view()}catch(x){toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t post. try again')}},
+async mkp(){if(!PIMG)return toast2('pick a photo first');if(!VER)return toast2('verify your email first');const an=$('#pa').checked,name=an?'anon.'+String(crypto.getRandomValues(new Uint16Array(1))[0]%10000).padStart(4,'0'):ME.username,pid=rand(12);
+try{await commit([W('posts/'+pid,{name:Fs(name),text:Fs($('#pc').value.trim().slice(0,140)),img:Fs(PIMG)},['at']),W(`users/${ME.uid}/posts/${pid}`,{},['at'])]);PIMG='';toast2('posted');view()}catch(x){toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t post. try again')}},
 async lk(d){const id=d.v,b=$(`.fa button[data-v="${id}"]`),m=$(`.fm[data-v="${id}"]`);if(!b)return;const on=b.dataset.m!=='1';
 try{await commit(on?[W(`posts/${id}/likes/${ME.uid}`,{},['at'])]:[{delete:nm(`posts/${id}/likes/${ME.uid}`)}])}catch(x){if(x.code!=='ALREADY_EXISTS')return toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t like')}
 const c=+b.querySelector('span').textContent+(on?1:-1);b.dataset.m=on?1:0;b.classList.toggle('on',on);b.innerHTML=ic('heart',on?'f':'')+'<span>'+Math.max(0,c)+'</span>';m.classList.remove('pop');if(on){void m.offsetWidth;m.classList.add('pop')}},
-async dp(d){if(!confirm('delete this post?'))return;try{await commit([{delete:nm('posts/'+d.v)}]);view()}catch(x){toast2('couldn’t delete')}},
+async dp(d){if(!confirm('delete this post?'))return;try{await commit([{delete:nm('posts/'+d.v)},{delete:nm(`users/${ME.uid}/posts/${d.v}`)}]);view()}catch(x){toast2('couldn’t delete')}},
 async rp(d){try{await commit([W('reports/'+rand(12),{post:Fs(d.v),by:Fs(ME.uid)},['at'])]);toast2('reported. thanks for flagging it')}catch(x){toast2('verify your email first')}},
 tab:d=>{V={tab:d.v,c:null,dm:null};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
 newc:()=>{$('#nc').hidden=!$('#nc').hidden},
