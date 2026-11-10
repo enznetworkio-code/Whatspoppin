@@ -101,7 +101,7 @@ h2{font-size:clamp(36px,5.4vw,68px);line-height:.95;letter-spacing:-.055em;font-
 .ref{display:flex;gap:8px;margin-top:18px;background:var(--s2);border:1px solid var(--s3);padding:6px;border-radius:99px}.ref code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px 14px;font-size:14px;color:var(--mu);text-transform:none}
 details{border-bottom:1px solid var(--s3);padding:22px 0}summary{font-size:21px;font-weight:700;letter-spacing:-.03em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}summary::after{content:"+";color:var(--p);font-size:28px;line-height:1}details[open] summary::after{content:"–"}details p{color:var(--mu);margin-top:12px;max-width:680px}
 footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-size:14px}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}.js .rv.in{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}.js .rv.vis{opacity:1;transform:none}
 @media(max-width:940px){.hero,.jin{grid-template-columns:1fr}.stage{min-height:660px}.c4,.c2,.c3{grid-column:span 6}.people{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.chip.l{left:0!important}.chip.r{right:0!important}}
 @media(max-width:520px){.people{grid-template-columns:1fr}.hform{flex-direction:column;border-radius:26px}.hform .btn{width:100%}.wrap{padding:0 18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .rv{opacity:1;transform:none}}
@@ -153,7 +153,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 @keyframes tick{from{transform:scale(.8)}to{transform:none}}
 #sp{display:none}
 .phone,.chip{animation:none}
-.js .rv{transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}.js .rv.in{transform:none}
+.js .rv{transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}.js .rv.vis{transform:none}
 .rv,.rv:nth-child(n){transition-delay:0s!important}
 .ab>*{animation:fade .18s ease both}.ab>:nth-child(n){animation-delay:0s}
 .abar .on svg,.bdg,.fa button.on svg{animation:tick .18s ease-out}
@@ -202,6 +202,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 .fh .fchip{margin-left:auto;text-decoration:none}.fh .fchip+button{margin-left:10px}
 .tabs2 button:disabled{opacity:.5}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.pi{position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:var(--s2)}.pi img{width:100%;height:100%;object-fit:cover;display:block}.pi button{position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.65);display:grid;place-items:center}.pi button svg{width:14px;height:14px;transform:rotate(45deg)}.pi small{position:absolute;left:6px;bottom:5px;font-size:11px;font-weight:700;text-shadow:0 1px 3px #000}
+.chip{z-index:5}.story .bk,.med .bk{inset:-20px}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
@@ -250,7 +251,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <div class="mini" id="mini"><div class="lb">map <span style="color:var(--mu);font-weight:600">6 posts near you</span></div><div class="op">open</div></div>
 <div class="tb"><span class="on">nearby</span><span>circle</span><span>hot</span></div>
 <div class="pp"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div>dre<small><b>circle</b> · 0.2mi · 2m</small></div></div>
-<div class="med"><img class="ph-img" onerror="this.remove()" src="assets/img1.jpg" alt="" loading="eager"><div class="cap">house party getting loud</div></div>
+<div class="med"><img class="ph-img" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'bk'}))" src="assets/img1.jpg" alt="" loading="eager"><div class="cap">house party getting loud</div></div>
 <div class="bar"><svg class="i f on"><use href="#home"/></svg><svg class="i"><use href="#pin"/></svg><span class="pl"><svg class="i" style="stroke-width:2.6"><use href="#plus"/></svg></span><svg class="i"><use href="#qrc"/></svg><svg class="i"><use href="#user"/></svg></div>
 </div></div>
 </div>
@@ -266,8 +267,8 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <article class="card c4 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#users"/></svg>story viewer</span>
 <h3>tap through the night. circle or stranger, it changes everything.</h3><p>full-screen posts you move through like stories. people in your circle get a cyan ring and a real dm. strangers stay anonymous and can only send quick reactions.</p>
 <div class="duo">
-<div class="vw"><div class="story"><img class="ph-img" onerror="this.remove()" src="assets/img2.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>dre <span class="tag cy">circle</span></div><div class="dock"><div class="msg">message dre…</div><div class="sendb"><svg class="i"><use href="#send"/></svg></div></div></div><p class="lab">your circle: real dms</p></div>
-<div class="vw"><div class="story"><img class="ph-img" onerror="this.remove()" src="assets/img3.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>anon.0914 <span class="tag an">anonymous</span></div><div class="dock"><div class="rx"><span><svg class="i"><use href="#flame"/></svg></span><span><svg class="i"><use href="#bolt"/></svg></span><span><svg class="i"><use href="#eye"/></svg></span><span><svg class="i"><use href="#heart"/></svg></span></div></div></div><p class="lab">strangers: anonymous reactions</p></div>
+<div class="vw"><div class="story"><img class="ph-img" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'bk'}))" src="assets/img2.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>dre <span class="tag cy">circle</span></div><div class="dock"><div class="msg">message dre…</div><div class="sendb"><svg class="i"><use href="#send"/></svg></div></div></div><p class="lab">your circle: real dms</p></div>
+<div class="vw"><div class="story"><img class="ph-img" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'bk'}))" src="assets/img3.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>anon.0914 <span class="tag an">anonymous</span></div><div class="dock"><div class="rx"><span><svg class="i"><use href="#flame"/></svg></span><span><svg class="i"><use href="#bolt"/></svg></span><span><svg class="i"><use href="#eye"/></svg></span><span><svg class="i"><use href="#heart"/></svg></span></div></div></div><p class="lab">strangers: anonymous reactions</p></div>
 </div></article>
 
 <article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#pin"/></svg>map</span>
@@ -286,7 +287,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 
 <article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#shield"/></svg>safety</span>
 <h3>built for a night out, not a lawsuit.</h3>
-<ul class="safe"><li><svg class="i"><use href="#shield"/></svg><span><b>under 18?</b> private by default, dms only from people they follow back.</span></li><li><svg class="i"><use href="#flag"/></svg><span><b>report and block</b> on every post and message.</span></li><li><svg class="i"><use href="#clock"/></svg><span><b>24-hour posts.</b> location info vanishes with them.</span></li><li><svg class="i"><use href="#eye"/></svg><span><b>anonymous to people,</b> not to moderators.</span></li></ul></article>
+<ul class="safe"><li><svg class="i"><use href="#shield"/></svg><span><b>under 18?</b> private by default, dms only from people they follow back.</span></li><li><svg class="i"><use href="#flag"/></svg><span><b>report any post</b> in one tap. you can also unfollow or remove anyone.</span></li><li><svg class="i"><use href="#clock"/></svg><span><b>24-hour posts.</b> location info vanishes with them.</span></li><li><svg class="i"><use href="#eye"/></svg><span><b>anonymous to people,</b> not to moderators.</span></li></ul></article>
 </div></div></section>
 
 <section style="padding-top:20px"><div class="wrap">
@@ -320,7 +321,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <label class="fld"><span>pick a username</span><input class="in" id="un" placeholder="yourname" maxlength="20" autocomplete="off"></label><div class="st" id="us"></div>
 <label class="fld"><span>your city</span><input class="in" id="ct" placeholder="so we know where to launch first" maxlength="40" autocomplete="address-level2"></label>
 <div class="fld"><span>what are you into?</span><div class="chips" id="ints" style="margin-top:0"></div></div>
-<label class="chk" style="margin:14px 0 4px"><input type="checkbox" id="age"><span>i’m 13 or older.</span></label>
+<label class="chk" style="margin:14px 0 4px"><input type="checkbox" id="age"><span>i’m 13 or older and agree to the <a href="terms.html" target="_blank" rel="noopener" style="text-decoration:underline">terms</a> and <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">privacy policy</a>.</span></label>
 <label class="chk" style="margin:4px 0 14px"><input type="checkbox" id="minor"><span>i’m under 18. my account starts private and only mutual follows can message me.</span></label>
 </div>
 <button class="btn" style="width:100%" type="submit" id="sbtn">create my account</button><div class="st no" id="err"></div>
@@ -335,7 +336,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <details class="rv"><summary>how do followers work?</summary><p>follow someone by searching their username, scanning their qr or opening their link. when you both follow each other you can message. you can unfollow or remove a follower any time.</p></details>
 <details class="rv"><summary>what does it cost?</summary><p>free. early members get their username locked and a head start in their city.</p></details>
 </div></div></section>
-<footer><div class="wrap"><span class="logo" style="font-size:20px">what’s poppin</span><span>© 2026 what’s poppin · built for good nights</span><a href="#faq" style="text-decoration:underline">privacy &amp; safety questions</a></div></footer>
+<footer><div class="wrap"><span class="logo" style="font-size:20px">what’s poppin</span><span>© 2026 what’s poppin · built for good nights</span><span><a href="privacy.html" style="text-decoration:underline">privacy</a> · <a href="terms.html" style="text-decoration:underline">terms</a> · <a href="#faq" style="text-decoration:underline">faq</a></span></div></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
@@ -358,7 +359,7 @@ $('#map').insertAdjacentHTML('afterbegin',bub.slice(0,4).map((b,i)=>`<span class
 // ticker
 {const t=['house party getting loud','taco truck line short rn','open mic just started','rooftop set is unreal tonight','street cypher going crazy','beer pong 2 spots left','ramen spot still open','someone brought a speaker'];const h=t.map(x=>`<span>${x}</span>`).join('');$('#mq').innerHTML=h+h}
 // reveal
-{const els=$$('.rv:not(.in)');if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});els.forEach(e=>io.observe(e))}else els.forEach(e=>e.classList.add('in'))}
+{const els=$$('.rv:not(.vis)');if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});els.forEach(e=>io.observe(e))}else els.forEach(e=>e.classList.add('vis'))}
 // firebase (auth + firestore over REST, no SDK)
 const FB={key:"AIzaSyBXCqCuNjH_wy5hMwMJydH9z65Va90pzT4",proj:"whatspoppin-161cf"};
 const DB=`https://firestore.googleapis.com/v1/projects/${FB.proj}/databases/(default)/documents`,IDT='https://identitytoolkit.googleapis.com/v1/accounts';
