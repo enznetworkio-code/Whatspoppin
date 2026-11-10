@@ -120,6 +120,56 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 .lockb{display:flex;gap:10px;align-items:center;justify-content:center;padding:14px;border-radius:18px;background:var(--s1);border:1px solid var(--s3);color:var(--mu);font-size:14px;margin-top:8px}
 .hd2{display:flex;align-items:center;gap:10px;margin:6px 0 4px}.hd2 button{padding:6px}
 .minil{display:flex;gap:8px}.minil .in{flex:1;text-transform:none}
+
+/* ---- flyer-wall polish: hard shadows, tape, stickers, grain ---- */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.07;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.glow{display:none}
+.grad{background:none;color:#fff;-webkit-background-clip:border-box;background-clip:border-box;box-shadow:inset 0 -.26em 0 var(--p);padding:0 .06em}
+h1{letter-spacing:-.065em}
+.rot{background:var(--cy);color:#000;padding:.02em .2em .08em;border-radius:.14em;transform:rotate(-2.2deg);box-shadow:5px 5px 0 var(--p);margin-top:.12em}.rot.out{transform:rotate(-2.2deg) translateY(.25em)}
+.lead{font-size:clamp(18px,2vw,21px)}
+.hform{border:2px solid #fff;box-shadow:6px 6px 0 var(--p);background:#000}
+.btn{box-shadow:4px 4px 0 #fff;border:2px solid #fff;transition:transform .12s,box-shadow .12s}.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #fff;background:var(--p)}.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #fff}.btn.g,.btn.on{box-shadow:none;border-color:var(--s3)}
+.pill{border-radius:10px}
+.phone{animation:none;transform:rotate(3deg);box-shadow:0 0 0 7px #0c0c10,14px 16px 0 7px var(--p)}
+.eyebrow{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;letter-spacing:.08em;color:var(--cy)}.eyebrow::before{content:"// "}
+.card{border:2px solid var(--s3);border-radius:20px;background:#0a0a0d;transition:transform .15s,box-shadow .15s,border-color .15s}
+.card:nth-child(odd){transform:rotate(-.5deg)}.card:nth-child(even){transform:rotate(.45deg)}
+.card:hover{transform:rotate(0) translateY(-3px);border-color:#fff;box-shadow:7px 7px 0 var(--p)}.card::after{display:none}
+.card::before{content:"";position:absolute;top:-1px;left:50%;width:74px;height:20px;transform:translateX(-50%) rotate(-3deg);background:rgba(255,255,255,.14);border-radius:2px;pointer-events:none}
+.tag{border-radius:6px;background:transparent;border:1.5px dashed currentColor;transform:rotate(-2deg);letter-spacing:.04em}
+.step{border-top:3px solid #fff}.step em{background:none;color:transparent;-webkit-text-stroke:2px var(--cy)}.step:nth-child(2) em{-webkit-text-stroke-color:var(--p)}.step:nth-child(3) em{-webkit-text-stroke-color:#ec4899}
+.tick{background:var(--cy);border:0;transform:rotate(-1.4deg);margin:10px -30px 18px;padding:12px 0}.tick div{color:#000;font-weight:800}.tick span::after{background:#000}
+.join{border-radius:26px;background:#fff;padding:3px;box-shadow:10px 10px 0 var(--p)}
+.ticket{border-radius:20px;border:2px dashed var(--s3)}
+.cbox{border-radius:16px;border:2px solid var(--s3)}.qrb{border-radius:14px}
+footer .logo{color:var(--cy)}
+@media(max-width:700px){.card:nth-child(n){transform:none}.tick{margin-inline:-24px}.phone{transform:rotate(2deg)}}
+@media(prefers-reduced-motion:reduce){.card,.phone,.rot,.tick{transform:none!important}}
+
+/* ---- mini app tabs + motion ---- */
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.98)}}
+@keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+@keyframes burst{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}30%{opacity:1}100%{transform:translate(-50%,-50%) scale(1.7);opacity:0}}
+@keyframes tst{from{opacity:0;transform:translate(-50%,16px) scale(.9)}}
+@keyframes sway{50%{transform:rotate(1.4deg) translateY(-7px)}}
+.ab>*{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.ab>:nth-child(2){animation-delay:.05s}.ab>:nth-child(3){animation-delay:.1s}.ab>:nth-child(4){animation-delay:.15s}.ab>:nth-child(5){animation-delay:.2s}.ab>:nth-child(6){animation-delay:.25s}.ab>:nth-child(n+7){animation-delay:.3s}
+.fp{margin:0 0 18px}.fh{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-weight:700}.fh small{display:block;color:var(--mu);font-weight:500;font-size:12px}
+.fm{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#2a1450,#0b0516);cursor:pointer;border:2px solid var(--s3)}.fm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fm .cap{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(0,0,0,.62);padding:7px 11px;border-radius:10px;font-size:14px;text-transform:none;width:fit-content}
+.hb{position:absolute;left:50%;top:50%;opacity:0;pointer-events:none}.hb svg{width:92px;height:92px;color:#ec4899}.fm.pop .hb{animation:burst .7s ease-out}
+.fa button{display:flex;gap:6px;align-items:center;padding:8px 2px;font-weight:700;color:var(--mu)}.fa button.on{color:#ec4899}.fa button.on svg{animation:pop .35s}
+.abar button{position:relative;transition:transform .15s,color .2s}.abar button:active{transform:scale(.86)}.abar .on svg{animation:pop .35s}
+.bdg{position:absolute;top:0;left:calc(50% + 6px);min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#ec4899;color:#fff;font:700 10px/17px system-ui,sans-serif;font-style:normal;text-align:center;animation:pop .35s}
+.ai{width:40px;height:40px;border-radius:12px;background:var(--s2);display:grid;place-items:center;flex:none}.act.nw{background:rgba(139,92,246,.13);margin:0 -20px;padding-inline:20px}.nd{width:9px;height:9px;border-radius:50%;background:var(--cy);flex:none}
+.tst{animation:tst .3s both}
+#sp{position:fixed;top:0;left:0;height:3px;width:0;background:var(--cy);z-index:70;transition:width .1s}
+.phone{animation:sway 8s ease-in-out infinite}
+.pc{transition:transform .2s}.pc:hover{transform:translateY(-4px) rotate(-.6deg)}
+.hero>div>.rv:nth-child(2){transition-delay:.07s}.hero>div>.rv:nth-child(3){transition-delay:.14s}.hero>div>.rv:nth-child(4){transition-delay:.21s}.hero>div>.rv:nth-child(5){transition-delay:.28s}
+.bento>.rv:nth-child(3n+2),.steps>.rv:nth-child(3n+2),.people>.rv:nth-child(3n+2){transition-delay:.09s}.bento>.rv:nth-child(3n),.steps>.rv:nth-child(3n),.people>.rv:nth-child(3n){transition-delay:.18s}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
@@ -149,9 +199,9 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 
 <header class="hero" id="top">
 <div>
-<span class="pill rv"><svg class="i" style="width:16px;height:16px"><use href="#lock"/></svg>ios · invite-only launch</span>
+<span class="pill rv"><svg class="i" style="width:16px;height:16px"><use href="#lock"/></svg>ios · early list is open</span>
 <h1 class="rv">see what’s <span class="grad">poppin</span> <span class="rot" id="rot">near you.</span></h1>
-<p class="lead rv">the app for the night out you didn’t know about. <b>post anonymously.</b> trust people you actually meet. your location stays blurred and everything is gone in 24 hours.</p>
+<p class="lead rv">it’s 10pm and you have no idea what’s happening. open this. <b>post as anon.4821,</b> trust only the people you actually meet, and watch the whole thing disappear in 24 hours. your spot stays blurred the whole time.</p>
 <form class="hform rv" id="hform"><input type="email" id="hmail" placeholder="your email" aria-label="email" autocomplete="email"><button class="btn" type="submit">get early access</button></form>
 <p class="fine rv"><b id="cnt">1,204</b> people are already on the list · no spam, ever</p>
 </div>
@@ -347,6 +397,24 @@ const res=await commit(w);ST.set('wp_pos',+res[5].transformResults[0].integerVal
 catch(x){er.textContent=x.code==='ALREADY_EXISTS'?'that username was just taken. pick another.':x.code==='PERMISSION_DENIED'?'signups open very soon. try again in a bit.':x.code?errMsg(x):'couldn’t save. check your connection.'}
 bt.disabled=false;bt.textContent='create my account'});
 // ---------- the app (signed in)
+
+// ---------- mini-app: nearby feed + activity
+const FEED=[['dre','cy','#3b3a4a','house party getting loud','main st · 0.2mi','2m',142,'assets/img1.jpg'],['anon.3827','an','#52525b','open mic just started','~0.4mi','6m',58,'assets/img2.jpg'],['mari','cy','#4a3b3b','beer pong 2 spots left','oak blvd · 0.9mi','12m',97,'assets/img3.jpg']];
+let LK=ST.get('wp_likes',[]),ACT=[],actT;
+function vNearby(){ab(`<p class="fine" style="margin:6px 0 12px">near you right now · demo posts. tap a photo to like it.</p>`+FEED.map((p,i)=>`<div class="fp"><div class="fh"><span class="ring ${p[1]}"><span class="av s" style="background:${p[2]}"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${p[0]}<small>${p[4]} · ${p[5]}</small></div></div><div class="fm" data-a="like" data-v="${i}"><img src="${p[7]}" alt="" loading="lazy" onerror="this.remove()"><b class="cap">${p[3]}</b><i class="hb">${ic('heart','f')}</i></div><div class="fa"><button data-a="like" data-v="${i}" class="${LK.includes(i)?'on':''}">${ic('heart',LK.includes(i)?'f':'')}<span>${p[6]+(LK.includes(i)?1:0)}</span></button></div></div>`).join(''))}
+async function actItems(){const o=[];
+try{(await listDocs('users/'+ME.uid+'/followers')).forEach(f=>o.push({i:'users',x:'<b>@'+esc(f.username)+'</b> followed you',at:f.at}))}catch(e){}
+try{const L=await listDocs('users/'+ME.uid+'/circles');await Promise.all(L.map(async c=>{if(c.role==='owner'){try{(await listDocs('circles/'+c._id+'/members')).filter(m=>m._id!==ME.uid).forEach(m=>o.push({i:'users',x:'someone joined <b>'+esc(c.name)+'</b>',at:m.at}))}catch(e){}}else{try{const P=await listDocs('circles/'+c._id+'/posts','orderBy=at%20desc&pageSize=1');if(P[0])o.push({i:'send',x:'new update in <b>'+esc(c.name)+'</b>: '+esc(String(P[0].text).slice(0,60)),at:P[0].at})}catch(e){}}}))}catch(e){}
+if(!VER)o.push({i:'shield',x:'verify your email to unlock circles, follows and messages',at:new Date().toISOString(),sys:1});
+o.push({i:'flame',x:'you’re in. share your code to climb the list',at:null,sys:1});
+return o.sort((a,b)=>(b.at?+new Date(b.at):0)-(a.at?+new Date(a.at):0))}
+const isNew=a=>a.at&&!a.sys&&+new Date(a.at)>ST.get('wp_seen',0);
+function badge(){const b=$('.abar [data-v=activity]');if(!b)return;let k=$('.bdg',b);if(V.n){if(!k){k=document.createElement('i');k.className='bdg';b.append(k)}k.textContent=V.n}else if(k)k.remove()}
+async function pollAct(){if(!ME)return;try{ACT=await actItems();V.n=ACT.filter(isNew).length;badge()}catch(e){}}
+async function vAct(){const n=VN;ab('<p class="fine" style="padding:20px 0">loading…</p>');const it=await actItems();if(n!==VN)return;
+ab(`<h3 style="margin:6px 0 10px">activity</h3>`+it.map(a=>{const nw=isNew(a);return `<div class="li act${nw?' nw':''}"><span class="ai">${ic(a.i)}</span><div class="bd" style="font-weight:500;text-transform:none">${a.x}<small>${a.at?ago(a.at):'welcome'}</small></div>${nw?'<i class="nd"></i>':''}</div>`}).join(''));
+ST.set('wp_seen',Date.now());V.n=0;badge()}
+{const sp=document.createElement('i');sp.id='sp';document.body.append(sp);addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true})}
 const spc=$('#spc');let V={tab:'you',c:null,dm:null},timer;
 const stop=()=>clearInterval(timer),every=(f,ms)=>{stop();timer=setInterval(f,ms)};
 const avh=(c='cy')=>`<span class="ring ${c}"><span class="av" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>`;
@@ -356,13 +424,13 @@ let u=null;try{u=await getDoc('users/'+AUTH.uid)}catch(x){}
 if(!u){setMode('sign');$('#em').value=AUTH.email||'';$('#pwL').hidden=true;$('#err').className='st ok';$('#err').textContent='almost there. pick a username to finish your account.';return}
 ME={uid:AUTH.uid,username:u.username,code:u.code,r:u.code.slice(4).toLowerCase(),minor:u.minor};
 await checkVer();$('#jcard').hidden=true;spc.hidden=false;$('#navp').innerHTML='<span class="dot"></span>@'+esc(ME.username);
-V={tab:'you',c:null,dm:null};app();if(fresh)confetti();spc.scrollIntoView({behavior:'smooth',block:'center'});
+V={tab:fresh?'you':'nearby',c:null,dm:null};app();if(fresh)confetti();pollAct();clearInterval(actT);actT=setInterval(()=>{if(V.tab!=='activity')pollAct()},30000);spc.scrollIntoView({behavior:'smooth',block:'center'});
 if(QJ||QF){history.replaceState(null,'',base());ST.set('wp_pend',{t:QJ?'j':'f',c:cc(QJ||QF)})}runPend()}
 function runPend(){const p=ST.get('wp_pend',null);if(!p||!ME)return;if(!VER)return toast2('verify your email and this will go through');ST.set('wp_pend',null);p.t==='j'?joinCircle(p.c):followCode(p.c)}
-function app(){stop();spc.innerHTML=`<div class="app"><div class="ah"><span class="logo" style="font-size:20px">what’s poppin</span><button class="pill" style="padding:6px 12px" data-a="out">@${esc(ME.username)} · log out</button></div>${VER?'':`<div class="ban">verify your email to make circles, follow people and message. <button data-a="ver">i verified</button><button data-a="resend">resend</button></div>`}<div class="ab" id="ab"></div><nav class="abar">${[['you','user'],['circles','users'],['people','send']].map(t=>`<button data-a="tab" data-v="${t[0]}" class="${V.tab==t[0]?'on':''}">${ic(t[1])}${t[0]}</button>`).join('')}</nav></div>`;view()}
-function toast2(m){const t=document.createElement('div');t.className='pill';t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#fff;color:#000';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)}
+function app(){stop();spc.innerHTML=`<div class="app"><div class="ah"><span class="logo" style="font-size:20px">what’s poppin</span><button class="pill" style="padding:6px 12px" data-a="out">@${esc(ME.username)} · log out</button></div>${VER?'':`<div class="ban">verify your email to make circles, follow people and message. <button data-a="ver">i verified</button><button data-a="resend">resend</button></div>`}<div class="ab" id="ab"></div><nav class="abar">${[['nearby','home'],['circles','users'],['people','send'],['activity','heart'],['you','user']].map(t=>`<button data-a="tab" data-v="${t[0]}" class="${V.tab==t[0]?'on':''}">${ic(t[1])}${t[0]}</button>`).join('')}</nav></div>`;view();badge()}
+function toast2(m){const t=document.createElement('div');t.className='pill tst';t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#fff;color:#000';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)}
 let VN=0;const cc=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,12);
-const view=()=>{VN++;stop();({you:vYou,circles:()=>V.c?vCircle():vCircles(),people:()=>V.dm?vDm():vPeople()})[V.tab]()};
+const view=()=>{VN++;stop();({nearby:vNearby,activity:vAct,you:vYou,circles:()=>V.c?vCircle():vCircles(),people:()=>V.dm?vDm():vPeople()})[V.tab]()};
 const ab=h=>{$('#ab').innerHTML=h};
 function vYou(){const link=base()+'?follow='+ME.code,pos=ST.get('wp_pos',0);
 ab(`<div class="c" style="padding-top:8px">${avh()}<h3 style="margin-top:8px">@${esc(ME.username)}</h3><p class="fine">${ME.minor?'under 18 account · private by default':'early access member'}${pos?' · #'+pos.toLocaleString()+' on the list':''}</p></div>
@@ -400,6 +468,7 @@ async function joinCircle(code){code=cc(code);if(!code)return;try{const c=await 
 await commit([W(`circles/${code}/members/${ME.uid}`,{},['at']),W(`users/${ME.uid}/circles/${code}`,{name:Fs(c.name),role:Fs(c.owner===ME.uid?'owner':'member')},['at'])]);toast2('joined '+c.name);V={tab:'circles',c:code,dm:null};app()}
 catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t join. try again')}}
 const acts={
+like:d=>{const i=+d.v,on=!LK.includes(i);LK=on?[...LK,i]:LK.filter(x=>x!=i);ST.set('wp_likes',LK);const m=$$('.fm')[i],b=$$('.fa button')[i];m.classList.remove('pop');if(on){void m.offsetWidth;m.classList.add('pop')}b.classList.toggle('on',on);b.innerHTML=ic('heart',on?'f':'')+'<span>'+(FEED[i][6]+(on?1:0))+'</span>'},
 tab:d=>{V={tab:d.v,c:null,dm:null};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
 newc:()=>{$('#nc').hidden=!$('#nc').hidden},
 async mk(){const name=$('#cn').value.trim(),desc=$('#cd').value.trim();if(name.length<2)return toast2('give it a name');const code='CIR-'+rand(6).toUpperCase();
@@ -413,7 +482,7 @@ async copy(d){try{await navigator.clipboard.writeText(d.v);toast2('copied')}catc
 share:d=>navigator.share?navigator.share({title:'what’s poppin',text:d.t,url:d.v}).catch(()=>{}):acts.copy(d),
 async ver(){toast2((await checkVer())?'verified. you’re good.':'not verified yet. open the email link first.');if(VER){app();runPend()}},
 async resend(){await sendVerify();toast2('sent again')},
-out:()=>{stop();AUTH=null;ME=null;ST.set('wp_auth',null);location.href=base()}};
+out:()=>{stop();clearInterval(actT);AUTH=null;ME=null;ST.set('wp_auth',null);location.href=base()}};
 spc.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&acts[b.dataset.a])acts[b.dataset.a](b.dataset)});
 spc.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('#pm,#dm,#jc,#fc2,#cn,#cd')){e.preventDefault();({pm:'post',dm:'send',jc:'join',fc2:'fol',cn:'mk',cd:'mk'})[e.target.id]&&acts[({pm:'post',dm:'send',jc:'join',fc2:'fol',cn:'mk',cd:'mk'})[e.target.id]]()}});
 if(QJ||QF){setMode('sign');const er=$('#err');er.className='st ok';er.textContent=QJ?'create an account (or log in) to join this circle.':'create an account (or log in) to follow them.'}
