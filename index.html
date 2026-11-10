@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>what’s poppin · early access</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--s1:#0e0e11;--s2:#17171c;--s3:#26262e;--tx:#fff;--mu:#9a9aa6;--p:#8b5cf6;--cy:#22d3ee;--an:linear-gradient(45deg,#fb923c,#ec4899,#8b5cf6);box-sizing:border-box;color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:"Bricolage Grotesque",-apple-system,"SF Pro Rounded",system-ui,sans-serif;font-size:17px;line-height:1.5;text-transform:lowercase;overflow-x:hidden}
+input,button{font:inherit;color:inherit;text-transform:none}button{background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px;border-radius:8px}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}svg.f{fill:currentColor}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.grad{background:linear-gradient(90deg,#c4b5fd,var(--p) 40%,var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+.glow{position:fixed;inset:-20% -10% auto -10%;height:70vh;background:radial-gradient(40% 50% at 70% 20%,rgba(139,92,246,.35),transparent 70%),radial-gradient(30% 40% at 20% 10%,rgba(34,211,238,.14),transparent 70%);pointer-events:none;z-index:-1}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{font-weight:800;font-size:25px;letter-spacing:-.06em}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:99px;background:var(--s2);border:1px solid var(--s3);font-size:14px;font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 0 rgba(34,211,238,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(34,211,238,0)}100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--p);color:#fff;font-weight:700;border-radius:99px;padding:15px 26px;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px -8px var(--p);background:#9b72f8}.btn.g{background:var(--s3)}.btn.sm{padding:10px 20px;font-size:15px}.btn:disabled{opacity:.5;pointer-events:none}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:34px 0 70px}
+h1{font-size:clamp(46px,8.4vw,112px);line-height:.88;letter-spacing:-.06em;font-weight:800;margin:22px 0}
+.lead{font-size:clamp(18px,2vw,22px);color:var(--mu);max-width:520px}.lead b{color:var(--tx);font-weight:600}
+.hform{display:flex;gap:8px;margin:30px 0 14px;max-width:520px;padding:7px;background:var(--s1);border:1px solid var(--s3);border-radius:99px}
+.hform input{flex:1;min-width:0;background:none;border:0;padding:0 18px;outline:0}.hform:focus-within{border-color:var(--p)}
+.fine{font-size:14px;color:var(--mu)}.fine b{color:var(--tx)}
+.stage{position:relative;display:grid;place-items:center;min-height:640px}
+.phone{width:292px;height:608px;border-radius:46px;background:#000;border:1px solid #33333d;box-shadow:0 0 0 7px #0c0c10,0 40px 90px -20px rgba(139,92,246,.55);position:relative;overflow:hidden;animation:float 7s ease-in-out infinite;text-transform:lowercase}
+@keyframes float{50%{transform:translateY(-12px) rotate(.6deg)}}
+.isl{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:88px;height:24px;border-radius:14px;background:#000;z-index:3;border:1px solid #1a1a20}
+.ph{padding:44px 14px 0;height:100%;display:flex;flex-direction:column}
+.ph .hd{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:19px;letter-spacing:-.06em}.ph .hd span{display:flex;gap:10px}.ph .hd svg{width:19px;height:19px}
+.sto{display:flex;gap:9px;margin:12px 0 10px}.sto div{text-align:center;font-size:9px;color:var(--mu);width:46px}
+.ring{display:inline-block;padding:2px;border-radius:50%;line-height:0;background:var(--s3);margin-bottom:3px}.ring.cy{background:var(--cy)}.ring.an{background:var(--an)}
+.av{width:42px;height:42px;border-radius:50%;border:2px solid #000;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}.av svg{width:80%;height:80%;fill:#d4d4d8}.av.s{width:30px;height:30px}
+.newp{position:absolute;left:50%;top:150px;transform:translate(-50%,-20px);opacity:0;background:var(--p);font-weight:800;font-size:11px;padding:7px 12px;border-radius:99px;z-index:4;transition:.5s cubic-bezier(.2,1.4,.4,1)}.newp.on{opacity:1;transform:translate(-50%,0)}
+.mini{height:78px;border-radius:16px;background:#14141a;position:relative;overflow:hidden;margin-bottom:8px}
+.mini::before,.map::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 34px,#22222a 34px 40px),repeating-linear-gradient(0deg,transparent 0 22px,#1d1d24 22px 27px)}
+.bb{position:absolute;width:20px;height:20px;border-radius:50%;border:2px solid #cfcfd6;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,var(--a),var(--b))}.bb.cy{border-color:var(--cy)}
+.mini .lb{position:absolute;left:10px;bottom:7px;font-size:10px;font-weight:800}.mini .op{position:absolute;right:8px;bottom:6px;background:#fff;color:#000;font-size:9px;font-weight:800;padding:4px 9px;border-radius:99px}
+.tb{display:flex;border-bottom:1px solid var(--s3);font-size:11px;font-weight:800;color:var(--mu)}.tb span{flex:1;text-align:center;padding:8px 0}.tb .on{color:#fff;border-bottom:2px solid #fff}
+.pp{display:flex;align-items:center;gap:8px;padding:9px 0 7px;font-weight:800;font-size:12px}.pp small{display:block;font-weight:500;color:var(--mu);font-size:10px}.pp small b{color:var(--cy);font-weight:500}
+.med{flex:1;border-radius:14px;position:relative;overflow:hidden;background:#0b0516;min-height:0}
+.bk{position:absolute;inset:-20px;filter:blur(10px) hue-rotate(var(--h,0deg));background:radial-gradient(circle at 28% 22%,#c0607a 0 9%,transparent 11%),radial-gradient(circle at 76% 32%,#5b4bd6 0 9%,transparent 11%),radial-gradient(circle at 40% 48%,#e2a35c 0 11%,transparent 13%),radial-gradient(circle at 80% 60%,#e5527c 0 10%,transparent 12%),radial-gradient(circle at 20% 76%,#b0507a 0 10%,transparent 12%)}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 10px;text-align:center;font-weight:800;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.bar{display:flex;justify-content:space-around;align-items:center;padding:10px 0 16px;color:var(--mu)}.bar .pl{background:var(--p);color:#fff;border-radius:11px;padding:6px 14px}.bar svg{width:20px;height:20px}.bar .on{color:#fff}
+.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:18px;background:rgba(23,23,28,.82);backdrop-filter:blur(14px);border:1px solid var(--s3);font-size:14px;font-weight:600;animation:float 6s ease-in-out infinite}.chip small{display:block;color:var(--mu);font-weight:500;font-size:12px}
+.chip svg{color:var(--cy)}
+.tick{overflow:hidden;border-block:1px solid var(--s3);background:var(--s1);padding:16px 0}.tick div{display:flex;gap:44px;width:max-content;animation:mq 38s linear infinite;font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--mu)}.tick span{display:flex;align-items:center;gap:44px}.tick span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--p)}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:90px 0}.eyebrow{font-size:14px;font-weight:700;color:var(--cy);letter-spacing:.04em;margin-bottom:12px}
+h2{font-size:clamp(36px,5.4vw,68px);line-height:.95;letter-spacing:-.055em;font-weight:800;max-width:780px}
+.sub{color:var(--mu);font-size:19px;max-width:560px;margin-top:16px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:48px}
+.card{background:var(--s1);border:1px solid var(--s3);border-radius:30px;padding:28px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}.card:hover{border-color:#5b3fb0;transform:translateY(-3px)}
+.card h3{font-size:26px;letter-spacing:-.04em;line-height:1.05;margin:6px 0 8px}.card p{color:var(--mu);font-size:16px}
+.c4{grid-column:span 4}.c2{grid-column:span 2}.c3{grid-column:span 3}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--s3)}.tag.cy{color:var(--cy)}.tag.an{color:#f9a8d4}
+.duo{display:flex;gap:16px;margin-top:24px;flex-wrap:wrap}.vw{flex:1;min-width:170px}
+.story{height:250px;border-radius:22px;position:relative;overflow:hidden;background:#0b0516;border:1px solid var(--s3)}
+.pg{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:4px;z-index:2}.pg i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3)}.pg i:first-child{background:#fff}
+.who{position:absolute;top:22px;left:10px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;z-index:2}
+.dock{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;display:flex;gap:8px;align-items:center}
+.msg{flex:1;padding:9px 14px;border-radius:99px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);font-size:13px;color:#ddd}
+.sendb{width:34px;height:34px;border-radius:50%;background:var(--p);display:grid;place-items:center}.sendb svg{width:16px;height:16px}
+.rx{display:flex;gap:6px;flex:1}.rx span{flex:1;height:34px;border-radius:12px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);display:grid;place-items:center}.rx svg{width:17px;height:17px}
+.lab{font-size:13px;color:var(--mu);margin-top:9px;text-align:center}
+.map{height:210px;border-radius:22px;position:relative;overflow:hidden;background:#111116;margin-top:20px;border:1px solid var(--s3)}
+.map::before{background:repeating-linear-gradient(90deg,transparent 0 56px,#25252c 56px 66px),repeating-linear-gradient(0deg,transparent 0 38px,#202027 38px 46px)}
+.blur{position:absolute;left:50%;top:50%;width:130px;height:130px;border-radius:50%;background:rgba(139,92,246,.22);border:1.5px dashed var(--p);transform:translate(-50%,-50%);animation:br 4s ease-in-out infinite}@keyframes br{50%{transform:translate(-50%,-50%) scale(1.08)}}
+.map .tagp{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.75);border-radius:99px;padding:6px 12px;font-size:12px;font-weight:700;display:flex;gap:6px;align-items:center}
+.qrw{position:relative;width:170px;margin:22px auto 6px}.qr{background:#fff;border-radius:20px;padding:14px;display:grid;grid-template-columns:repeat(21,1fr);aspect-ratio:1}.qr i{background:#000}.qr i.o{background:#fff}
+.sc{position:absolute;left:-6px;right:-6px;height:3px;background:var(--cy);box-shadow:0 0 18px var(--cy);top:12%;animation:scan 2.6s ease-in-out infinite;border-radius:2px}@keyframes scan{50%{top:86%}}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;border:1px solid var(--s3);background:var(--s2);margin-top:12px;font-weight:700;font-size:15px}.opt.sel{border-color:var(--p);background:rgba(139,92,246,.12)}.opt .ck{margin-left:auto;color:var(--p)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}.chips span{padding:6px 12px;border-radius:99px;font-size:13px;font-weight:700;background:var(--s3);color:var(--mu)}.chips .on{background:var(--p);color:#fff}
+.safe li{list-style:none;display:flex;gap:12px;align-items:flex-start;margin-top:14px;color:var(--mu);font-size:15px}.safe svg{color:var(--cy);margin-top:2px;width:20px;height:20px}.safe b{color:var(--tx);font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.step{border-top:1px solid var(--s3);padding-top:22px}.step em{font-style:normal;font-size:64px;font-weight:800;letter-spacing:-.06em;line-height:1;background:var(--an);-webkit-background-clip:text;background-clip:text;color:transparent}.step h3{font-size:24px;letter-spacing:-.04em;margin:10px 0 6px}.step p{color:var(--mu)}
+.people{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+.pc{background:var(--s1);border:1px solid var(--s3);border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:10px;transition:transform .3s,border-color .3s}.pc:hover{transform:translateY(-4px);border-color:#5b3fb0}
+.pc .av{width:62px;height:62px}.pc h4{font-size:19px;letter-spacing:-.03em}.pc p{color:var(--mu);font-size:14px;flex:1}.pc .btn{width:100%}
+.btn.on{background:var(--s3);color:var(--tx)}
+.soc{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.join{position:relative;border-radius:40px;padding:2px;background:linear-gradient(135deg,var(--p),var(--cy) 50%,#ec4899);margin-top:8px}
+.jin{background:#08080b;border-radius:38px;padding:clamp(26px,5vw,60px);display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.fld{display:block;margin-top:14px}.fld span{display:block;font-size:13px;font-weight:700;color:var(--mu);margin-bottom:7px}
+.in{width:100%;background:var(--s2);border:1px solid var(--s3);border-radius:16px;padding:15px 16px;outline:0;transition:border-color .2s}.in:focus{border-color:var(--p)}
+.st{font-size:13px;margin-top:6px;min-height:20px}.ok{color:#34d399}.no{color:#fb7185}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:18px 0;font-size:14px;color:var(--mu)}.chk input{width:20px;height:20px;accent-color:var(--p);margin-top:2px}
+.ticket{text-align:center;padding:28px;border-radius:28px;background:var(--s1);border:1px solid var(--s3)}.ticket .n{font-size:clamp(64px,10vw,110px);font-weight:800;letter-spacing:-.07em;line-height:1}
+.ref{display:flex;gap:8px;margin-top:18px;background:var(--s2);border:1px solid var(--s3);padding:6px;border-radius:99px}.ref code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px 14px;font-size:14px;color:var(--mu);text-transform:none}
+details{border-bottom:1px solid var(--s3);padding:22px 0}summary{font-size:21px;font-weight:700;letter-spacing:-.03em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}summary::after{content:"+";color:var(--p);font-size:28px;line-height:1}details[open] summary::after{content:"–"}details p{color:var(--mu);margin-top:12px;max-width:680px}
+footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-size:14px}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}.js .rv.in{opacity:1;transform:none}
+@media(max-width:940px){.hero,.jin{grid-template-columns:1fr}.stage{min-height:660px}.c4,.c2,.c3{grid-column:span 6}.people{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.chip.l{left:0!important}.chip.r{right:0!important}}
+@media(max-width:520px){.people{grid-template-columns:1fr}.hform{flex-direction:column;border-radius:26px}.hform .btn{width:100%}.wrap{padding:0 18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .rv{opacity:1;transform:none}}
+.rot{display:inline-block;transition:opacity .35s,transform .35s}.rot.out{opacity:0;transform:translateY(.25em)}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.16),transparent 70%);opacity:0;transition:.3s;pointer-events:none}.card:hover::after{opacity:1}
+.meter{height:8px;border-radius:9px;background:var(--s3);overflow:hidden;margin:16px 0 8px}.meter i{display:block;height:100%;width:0;background:var(--an);transition:width .9s cubic-bezier(.2,.8,.2,1)}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:50}.btn.g{color:var(--tx)}
+.tabs2{display:flex;background:var(--s2);border-radius:99px;padding:4px;margin-bottom:6px}.tabs2 button{flex:1;padding:10px;border-radius:99px;font-weight:700;color:var(--mu)}.tabs2 button.on{background:var(--p);color:#fff}
+.app{max-width:440px;margin:0 auto;background:#000;border:1px solid var(--s3);border-radius:38px;box-shadow:0 40px 90px -30px rgba(139,92,246,.5);overflow:hidden;display:flex;flex-direction:column;height:min(760px,92vh);text-transform:lowercase}
+.ah{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 10px}.ab{flex:1;overflow-y:auto;padding:4px 20px 16px;scrollbar-width:none}.ab h3{font-size:22px;letter-spacing:-.04em}
+.abar{display:flex;border-top:1px solid var(--s2);padding:8px 8px 14px}.abar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:700;color:var(--mu);padding:6px}.abar .on{color:#fff}
+.ban{margin:0 20px 8px;padding:12px 14px;border-radius:16px;background:rgba(139,92,246,.15);border:1px solid #5b3fb0;font-size:13px}.ban button{text-decoration:underline;margin-left:8px;font-weight:700}
+.cbox{background:var(--s1);border:1px solid var(--s3);border-radius:22px;padding:16px;text-align:center;margin:12px 0}.cbox small{color:var(--mu);font-size:12px;font-weight:700}.code{font-size:32px;font-weight:800;letter-spacing:.14em;margin:4px 0 12px;text-transform:uppercase}
+.duo2{display:flex;gap:8px}.duo2 button{flex:1;padding:10px 6px;border-radius:14px;background:var(--s3);font-weight:700;font-size:13px}
+.qrb{width:190px;margin:14px auto 4px;background:#fff;border-radius:22px;padding:12px;text-align:center}.qrb svg{width:100%;height:auto;display:block}.qrb+p{text-align:center;margin-bottom:10px}
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--s2);cursor:pointer}.li .bd{flex:1;min-width:0;font-weight:700}.li small{display:block;color:var(--mu);font-weight:500;font-size:13px}
+.msgs{display:flex;flex-direction:column;gap:6px;padding:8px 0;min-height:200px}.bb2{max-width:82%;padding:10px 14px;border-radius:18px;background:var(--s2);line-height:1.4;font-size:15px;text-transform:none;word-break:break-word}.bb2.me{background:var(--p);align-self:flex-end;border-bottom-right-radius:5px}.bb2 small{display:block;color:rgba(255,255,255,.55);font-size:11px;margin-top:3px}
+.cmp{display:flex;gap:8px;padding-top:10px}.cmp .in{flex:1;padding:12px 16px;border-radius:99px;text-transform:none}.cmp button{width:46px;border-radius:50%;background:var(--p);display:grid;place-items:center;flex:none}
+.lockb{display:flex;gap:10px;align-items:center;justify-content:center;padding:14px;border-radius:18px;background:var(--s1);border:1px solid var(--s3);color:var(--mu);font-size:14px;margin-top:8px}
+.hd2{display:flex;align-items:center;gap:10px;margin:6px 0 4px}.hd2 button{padding:6px}
+.minil{display:flex;gap:8px}.minil .in{flex:1;text-transform:none}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5a2.5 2.5 0 00-.8 4.9V17h1.6v-5.6A2.5 2.5 0 0012 6.5z"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="qrc" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+<symbol id="heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"/></symbol>
+<symbol id="send" viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></symbol>
+<symbol id="flame" viewBox="0 0 24 24"><path d="M12 21c4 0 7-2.6 7-6.5 0-3-2-5-3.5-7C15 9 14 10 13 10c0-3-1.5-5.5-3.5-7C9.500 6.500 5 8.500 5 14.500 5 18.400 8 21 12 21z"/></symbol>
+<symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
+<symbol id="copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></symbol>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.8a3.5 3.5 0 010 6.4M18 14a6 6 0 013.5 6"/></symbol>
+<symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h13l-2 4 2 4H5"/></symbol>
+<symbol id="mask" viewBox="0 0 24 24"><path d="M3 8c3-2 6-2 9 0 3-2 6-2 9 0v4c0 4-4 7-9 7s-9-3-9-7z"/><circle cx="8.500" cy="11.500" r="1.500"/><circle cx="15.500" cy="11.500" r="1.500"/></symbol>
+</defs></svg>
+<div class="glow"></div>
+<div class="wrap">
+<nav><a href="#top" class="logo">what’s poppin</a><a href="#join" class="pill" id="navp"><span class="dot"></span>early access open</a></nav>
+
+<header class="hero" id="top">
+<div>
+<span class="pill rv"><svg class="i" style="width:16px;height:16px"><use href="#lock"/></svg>ios · invite-only launch</span>
+<h1 class="rv">see what’s <span class="grad">poppin</span> <span class="rot" id="rot">near you.</span></h1>
+<p class="lead rv">the app for the night out you didn’t know about. <b>post anonymously.</b> trust people you actually meet. your location stays blurred and everything is gone in 24 hours.</p>
+<form class="hform rv" id="hform"><input type="email" id="hmail" placeholder="your email" aria-label="email" autocomplete="email"><button class="btn" type="submit">get early access</button></form>
+<p class="fine rv"><b id="cnt">1,204</b> people are already on the list · no spam, ever</p>
+</div>
+<div class="stage rv">
+<div class="chip l" style="left:-10px;top:120px"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div>anon.3827<small>0.4mi · open mic just started</small></div></div>
+<div class="chip r" style="right:-10px;top:300px;animation-delay:-2s"><svg class="i"><use href="#lock"/></svg><div>blurred to ~0.3 mi<small>never the exact spot</small></div></div>
+<div class="chip l" style="left:10px;bottom:90px;animation-delay:-4s"><svg class="i"><use href="#clock"/></svg><div>gone in 24h<small>no feed to dig through</small></div></div>
+<div class="phone"><div class="isl"></div>
+<div class="ph">
+<div class="hd">what’s poppin<span><svg class="i"><use href="#heart"/></svg><svg class="i"><use href="#send"/></svg></span></div>
+<div class="sto" id="sto"></div>
+<div class="newp" id="newp">1 new post</div>
+<div class="mini" id="mini"><div class="lb">map <span style="color:var(--mu);font-weight:600">6 posts near you</span></div><div class="op">open</div></div>
+<div class="tb"><span class="on">nearby</span><span>circle</span><span>hot</span></div>
+<div class="pp"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div>dre<small><b>circle</b> · 0.2mi · 2m</small></div></div>
+<div class="med"><div class="bk"></div><div class="cap">house party getting loud</div></div>
+<div class="bar"><svg class="i f on"><use href="#home"/></svg><svg class="i"><use href="#pin"/></svg><span class="pl"><svg class="i" style="stroke-width:2.6"><use href="#plus"/></svg></span><svg class="i"><use href="#qrc"/></svg><svg class="i"><use href="#user"/></svg></div>
+</div></div>
+</div>
+</header>
+</div>
+
+<div class="tick" aria-hidden="true"><div id="mq"></div></div>
+
+<section><div class="wrap">
+<p class="eyebrow rv">what’s inside</p>
+<h2 class="rv">two kinds of people. <span class="grad">one very different feed.</span></h2>
+<div class="bento">
+<article class="card c4 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#users"/></svg>story viewer</span>
+<h3>tap through the night. circle or stranger, it changes everything.</h3><p>full-screen posts you move through like stories. people in your circle get a cyan ring and a real dm. strangers stay anonymous and can only send quick reactions.</p>
+<div class="duo">
+<div class="vw"><div class="story"><div class="bk" style="--h:20deg"></div><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>dre <span class="tag cy">circle</span></div><div class="dock"><div class="msg">message dre…</div><div class="sendb"><svg class="i"><use href="#send"/></svg></div></div></div><p class="lab">your circle: real dms</p></div>
+<div class="vw"><div class="story"><div class="bk" style="--h:300deg"></div><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>anon.0914 <span class="tag an">anonymous</span></div><div class="dock"><div class="rx"><span><svg class="i"><use href="#flame"/></svg></span><span><svg class="i"><use href="#bolt"/></svg></span><span><svg class="i"><use href="#eye"/></svg></span><span><svg class="i"><use href="#heart"/></svg></span></div></div></div><p class="lab">strangers: anonymous reactions</p></div>
+</div></article>
+
+<article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#pin"/></svg>map</span>
+<h3>blurred. never exact.</h3><p>every post sits in a shaded area about a third of a mile wide. private addresses never appear.</p>
+<div class="map" id="map"><div class="blur"></div><div class="tagp"><svg class="i" style="width:14px;height:14px"><use href="#lock"/></svg>~0.3 mi · never the exact spot</div></div></article>
+
+<article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#qrc"/></svg>trust</span>
+<h3>trust happens in person.</h3><p>scan a friend’s code to join each other’s circle. no scan, no access. rotate your code any time.</p>
+<div class="qrw"><div class="qr" id="qr"></div><div class="sc"></div></div></article>
+
+<article class="card c2 rv"><span class="tag an"><svg class="i" style="width:14px;height:14px"><use href="#mask"/></svg>identity</span>
+<h3>anon or you. every post.</h3><p>who you are and who sees it are two separate choices.</p>
+<div class="opt sel"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>post as anon.3827<svg class="i ck"><use href="#check"/></svg></div>
+<div class="opt"><span class="ring"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>post as you.poppin</div>
+<div class="chips"><span class="on">nearby</span><span>followers</span><span>circle</span><span>trusted</span></div></article>
+
+<article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#shield"/></svg>safety</span>
+<h3>built for a night out, not a lawsuit.</h3>
+<ul class="safe"><li><svg class="i"><use href="#shield"/></svg><span><b>under 18?</b> private by default, circle-only dms.</span></li><li><svg class="i"><use href="#flag"/></svg><span><b>report and block</b> on every post and message.</span></li><li><svg class="i"><use href="#clock"/></svg><span><b>24-hour posts.</b> location info vanishes with them.</span></li><li><svg class="i"><use href="#eye"/></svg><span><b>anonymous to people,</b> not to moderators.</span></li></ul></article>
+</div></div></section>
+
+<section style="padding-top:20px"><div class="wrap">
+<p class="eyebrow rv">how it works</p><h2 class="rv">three taps from <span class="grad">“what’s going on?”</span></h2>
+<div class="steps">
+<div class="step rv"><em>01</em><h3>open the feed</h3><p>nearby, circle or hot. see what’s live within a few miles right now.</p></div>
+<div class="step rv"><em>02</em><h3>drop a post</h3><p>snap a photo, add a caption, pick anon or you, pick who sees it.</p></div>
+<div class="step rv"><em>03</em><h3>let it vanish</h3><p>24 hours later it’s gone. no archive, no awkward scroll back.</p></div>
+</div></div></section>
+
+<section style="padding-top:20px"><div class="wrap">
+<p class="eyebrow rv">follow before launch</p><h2 class="rv">follow the people <span class="grad">who’ll be poppin first.</span></h2>
+<p class="sub rv">follow now and your feed won’t be empty on day one. <span id="fc" style="color:var(--tx);font-weight:600"></span></p>
+<div class="people" id="people"></div>
+<div class="soc rv"><a class="pill" href="#">instagram <svg class="i" style="width:16px;height:16px"><use href="#arrow"/></svg></a><a class="pill" href="#">tiktok <svg class="i" style="width:16px;height:16px"><use href="#arrow"/></svg></a><a class="pill" href="#">x <svg class="i" style="width:16px;height:16px"><use href="#arrow"/></svg></a></div>
+</div></section>
+
+<section id="join" style="padding-top:20px"><div class="wrap"><div id="spc" hidden></div><div class="join rv" id="jcard"><div class="jin">
+<div><p class="eyebrow">early access</p><h2 style="font-size:clamp(34px,5vw,60px)">claim your name <span class="grad">before someone else does.</span></h2><p class="sub">early members lock in their username, get in first in their city and move up the line by inviting friends.</p></div>
+<div id="formbox">
+<div class="tabs2"><button type="button" class="on" id="tSign">create account</button><button type="button" id="tLog">log in</button></div>
+<form id="jform" novalidate>
+<label class="fld"><span>email</span><input class="in" id="em" type="email" placeholder="you@email.com" autocomplete="email" required></label>
+<label class="fld" id="pwL"><span>password</span><input class="in" id="pw" type="password" placeholder="at least 8 characters" autocomplete="new-password"></label>
+<div id="signOnly">
+<label class="fld"><span>pick a username</span><input class="in" id="un" placeholder="yourname" maxlength="20" autocomplete="off"></label><div class="st" id="us"></div>
+<label class="fld"><span>your city</span><input class="in" id="ct" placeholder="so we know where to launch first" maxlength="40" autocomplete="address-level2"></label>
+<div class="fld"><span>what are you into?</span><div class="chips" id="ints" style="margin-top:0"></div></div>
+<label class="chk" style="margin:14px 0 4px"><input type="checkbox" id="age"><span>i’m 13 or older.</span></label>
+<label class="chk" style="margin:4px 0 14px"><input type="checkbox" id="minor"><span>i’m under 18. my account starts private and only mutual follows can message me.</span></label>
+</div>
+<button class="btn" style="width:100%" type="submit" id="sbtn">create my account</button><div class="st no" id="err"></div>
+<button type="button" class="fine" id="forgot" style="text-decoration:underline" hidden>forgot password?</button>
+</form></div>
+</div></div></div></section>
+
+<section style="padding-top:20px"><div class="wrap"><h2 class="rv" style="font-size:clamp(32px,4.4vw,54px)">questions.</h2><div style="margin-top:26px;max-width:880px">
+<details class="rv"><summary>can people see exactly where i am?</summary><p>no. everyone only ever sees a shaded area about a third of a mile wide. private addresses are never shown, and location info expires with your post.</p></details>
+<details class="rv"><summary>if i post anonymously, am i untraceable?</summary><p>anonymous to other people, yes. but the platform keeps account ownership on the back end so moderators can act on abuse and harassment.</p></details>
+<details class="rv"><summary>who can use it?</summary><p>13 and up. accounts under 18 start private, only their circle can message them, and their location stays blurred.</p></details>
+<details class="rv"><summary>what does it cost?</summary><p>free. early members get their username locked and a head start in their city.</p></details>
+</div></div></section>
+<footer><div class="wrap"><span class="logo" style="font-size:20px">what’s poppin</span><span>© 2026 what’s poppin · built for good nights</span><span>privacy · terms · safety</span></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const ic=(n,c='')=>`<svg class="i ${c}"><use href="#${n}"/></svg>`;
+const ST={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const SIGNUP_ENDPOINT=""; // paste a form/Firebase endpoint here when you host this page yourself
+const av=(bg,c='')=>`<span class="av ${c}" style="background:${bg}"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span>`;
+// hero phone
+$('#sto').innerHTML=[['you','','#2b2b33'],['dre','cy','#3b3a4a'],['mari','cy','#4a3b3b'],['anon.3827','an','#52525b'],['anon.0914','an','#3f3f46']].map(s=>`<div><span class="ring ${s[1]}">${av(s[2])}</span>${s[0]}</div>`).join('');
+const bub=[['#7a8a5a','#2a2f20',16,60,'cy'],['#d9a05b','#5a3a20',36,30,''],['#e879f9','#2a1040',55,62,'cy'],['#c9a66b','#4a3a20',74,34,''],['#e07a4a','#3a1a10',88,58,'']];
+$('#mini').insertAdjacentHTML('afterbegin',bub.map(b=>`<span class="bb ${b[4]}" style="left:${b[2]}%;top:${b[3]}%;--a:${b[0]};--b:${b[1]}"></span>`).join(''));
+setTimeout(()=>$('#newp').classList.add('on'),2600);
+// map card
+$('#map').insertAdjacentHTML('afterbegin',bub.slice(0,4).map((b,i)=>`<span class="bb ${b[4]}" style="width:26px;height:26px;left:${[26,70,38,76][i]}%;top:${[30,32,74,70][i]}%;--a:${b[0]};--b:${b[1]}"></span>`).join(''));
+// qr
+{let g='';for(let i=0;i<441;i++){const x=i%21,y=(i/21)|0,f=(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);const on=f?(x%6==0||y%6==0||x==14||x==20||y==14||y==20||(x%6>1&&x%6<5&&y%6>1&&y%6<5)):(x*7+y*13+x*y)%3==0;g+=`<i class="${on?'':'o'}"></i>`}$('#qr').innerHTML=g}
+// ticker
+{const t=['house party getting loud','taco truck line short rn','open mic just started','rooftop set is unreal tonight','street cypher going crazy','beer pong 2 spots left','ramen spot still open','someone brought a speaker'];const h=t.map(x=>`<span>${x}</span>`).join('');$('#mq').innerHTML=h+h}
+// follow
+const P=[['dre','circle','house parties and rooftop sets. the one who always knows.','#3b3a4a','cy'],['mari','circle','food trucks, taco lines and late-night finds.','#4a3b3b','cy'],['kj','host','plans the weekend. events land here first.','#334155','cy'],['poppin.hq','official','launch news, city drops and invite codes.','#2a1a40','an']];
+let fol=ST.get('wp_follow',[]);
+function drawPeople(){$('#people').innerHTML=P.map((p,i)=>`<div class="pc rv in"><span class="ring ${p[4]}" style="align-self:flex-start">${av(p[3])}</span><h4>${p[0]} <span class="tag ${p[4]=='an'?'an':'cy'}">${p[1]}</span></h4><p>${p[2]}</p><button class="btn sm ${fol.includes(p[0])?'on':''}" data-h="${p[0]}">${fol.includes(p[0])?'following':'follow'}</button></div>`).join('');
+$('#fc').textContent=fol.length?`you’re following ${fol.length}.`:''}
+$('#people').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const h=b.dataset.h;fol=fol.includes(h)?fol.filter(x=>x!=h):[...fol,h];ST.set('wp_follow',fol);drawPeople()});
+drawPeople();
+// reveal
+{const els=$$('.rv:not(.in)');if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});els.forEach(e=>io.observe(e))}else els.forEach(e=>e.classList.add('in'))}
+// firebase (auth + firestore over REST, no SDK)
+const FB={key:"AIzaSyBXCqCuNjH_wy5hMwMJydH9z65Va90pzT4",proj:"whatspoppin-161cf"};
+const DB=`https://firestore.googleapis.com/v1/projects/${FB.proj}/databases/(default)/documents`,IDT='https://identitytoolkit.googleapis.com/v1/accounts';
+const nm=p=>`projects/${FB.proj}/databases/(default)/documents/${p}`;
+const Fs=v=>({stringValue:String(v)}),Fa=a=>({arrayValue:{values:a.map(Fs)}}),Fb=v=>({booleanValue:!!v});
+const D=d=>{const o={_id:d.name.split('/').pop()};for(const k in(d.fields||{})){const v=d.fields[k];o[k]=v.stringValue!==undefined?v.stringValue:v.integerValue!==undefined?+v.integerValue:v.booleanValue!==undefined?v.booleanValue:v.timestampValue!==undefined?v.timestampValue:(v.arrayValue?(v.arrayValue.values||[]).map(x=>x.stringValue):null)}return o};
+const rand=(n=6)=>[...crypto.getRandomValues(new Uint8Array(n))].map(x=>(x%36).toString(36)).join('');
+const REF=(new URLSearchParams(location.search).get('ref')||'').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,12);
+const QJ=new URLSearchParams(location.search).get('join'),QF=new URLSearchParams(location.search).get('follow');
+let AUTH=ST.get('wp_auth',null),ME=null,VER=false;
+const setAuth=j=>{AUTH={uid:j.localId||AUTH.uid,email:j.email||(AUTH&&AUTH.email),id:j.idToken||j.id_token,refresh:j.refreshToken||j.refresh_token,exp:Date.now()+(+(j.expiresIn||j.expires_in)||3600)*1000};ST.set('wp_auth',AUTH)};
+async function jpost(u,b){const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error((j.error&&j.error.message)||'error');e.code=(j.error&&j.error.message)||'';throw e}return j}
+async function token(force){if(!AUTH)return null;if(force||Date.now()>AUTH.exp-60000){const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${FB.key}`,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(AUTH.refresh)});const j=await r.json().catch(()=>({}));if(!r.ok){if(r.status<500){AUTH=null;ST.set('wp_auth',null)}return null}setAuth(j)}return AUTH.id}
+async function fs(method,path,body){const t=await token();const u=(path[0]===':'?DB+path:DB+'/'+path)+(path.includes('?')?'&':'?')+'key='+FB.key;const r=await fetch(u,{method,headers:{'Content-Type':'application/json',...(t?{Authorization:'Bearer '+t}:{})},body:body&&JSON.stringify(body)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error((j.error&&j.error.message)||'');e.status=r.status;e.code=j.error&&j.error.status;throw e}return j}
+const getDoc=async p=>{try{return D(await fs('GET',p))}catch(e){if(e.status===404)return null;throw e}};
+const listDocs=async(p,q='pageSize=100')=>{try{return((await fs('GET',p+'?'+q)).documents||[]).map(D)}catch(e){if(e.status===404)return[];throw e}};
+const commit=async w=>(await fs('POST',':commit',{writes:w})).writeResults;
+const W=(p,f={},ts=[])=>({update:{name:nm(p),fields:f},...(ts.length?{updateTransforms:ts.map(x=>({fieldPath:x,setToServerValue:'REQUEST_TIME'}))}:{}),currentDocument:{exists:false}});
+const INC=p=>({update:{name:nm(p)},updateMask:{fieldPaths:[]},updateTransforms:[{fieldPath:'count',increment:{integerValue:'1'}}],currentDocument:{exists:true}});
+async function getCount(p){try{const d=await getDoc(p);return d?d.count:null}catch(e){return null}}
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ago=t=>{if(!t)return'now';const x=(Date.now()-new Date(t))/1000;return x<60?'now':x<3600?(x/60|0)+'m':x<86400?(x/3600|0)+'h':(x/86400|0)+'d'};
+const qrSvg=t=>{try{const q=qrcode(0,'M');q.addData(t);q.make();return q.createSvgTag(4,2)}catch(e){return'<p class="fine" style="color:#000">code only</p>'}};
+const base=()=>location.href.split('?')[0].split('#')[0];
+const AUTHERR={EMAIL_EXISTS:'that email already has an account. try logging in.',INVALID_LOGIN_CREDENTIALS:'wrong email or password.',INVALID_PASSWORD:'wrong email or password.',EMAIL_NOT_FOUND:'wrong email or password.',WEAK_PASSWORD:'use at least 8 characters.',INVALID_EMAIL:'that email doesn’t look right.',TOO_MANY_ATTEMPTS_TRY_LATER:'too many tries. wait a few minutes.',OPERATION_NOT_ALLOWED:'email sign-in isn’t turned on in firebase yet.'};
+const errMsg=e=>{const k=Object.keys(AUTHERR).find(x=>(e.code||'').startsWith(x));return k?AUTHERR[k]:'something went wrong. try again.'};
+// live counter + rotating headline + card spotlight
+let shown=0;function countTo(to){if(to<shown)shown=0;const el=$('#cnt');const st=()=>{shown+=Math.ceil((to-shown)/9);el.textContent=shown.toLocaleString();if(shown<to)requestAnimationFrame(st)};st()}
+countTo(1204);getCount('meta/stats').then(n=>{if(n!==null)countTo(n)});
+{const W=['near you.','tonight.','right now.','on campus.'];let i=0;const r=$('#rot');setInterval(()=>{r.classList.add('out');setTimeout(()=>{i=(i+1)%W.length;r.textContent=W[i];r.classList.remove('out')},350)},2800)}
+$$('.card').forEach(c=>c.addEventListener('mousemove',e=>{const b=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-b.left+'px');c.style.setProperty('--my',e.clientY-b.top+'px')}));
+// confetti
+function confetti(){const c=document.createElement('canvas');c.id='cf';document.body.append(c);const x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;const col=['#8b5cf6','#22d3ee','#ec4899','#fb923c','#fff'];const ps=Array.from({length:110},()=>({x:innerWidth/2,y:innerHeight*.6,vx:(Math.random()-.5)*16,vy:-Math.random()*16-4,s:Math.random()*7+4,c:col[Math.random()*5|0],r:Math.random()*6}));let f=0;(function t(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.vy+=.45;p.x+=p.vx;p.y+=p.vy;p.r+=.2;x.fillStyle=p.c;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore()});if(++f<130)requestAnimationFrame(t);else c.remove()})()}
+// form
+const RES=['admin','poppin','support','dre','mari','kj','moderator','poppin.hq'];
+const INTS=['house parties','live music','food trucks','sports','nightlife','art','gaming','outdoors'];let picked=[],MODE='sign';
+$('#ints').innerHTML=INTS.map(i=>`<span role="button" tabindex="0" data-i="${i}" style="cursor:pointer">${i}</span>`).join('');
+$('#ints').addEventListener('click',e=>{const s=e.target.closest('span');if(!s)return;const i=s.dataset.i;picked=picked.includes(i)?picked.filter(x=>x!=i):[...picked,i];s.classList.toggle('on')});
+$('#ints').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.target.click()}});
+const okU=n=>/^[a-z0-9._]{3,20}$/.test(n)&&!/^\.|\.$|\.\./.test(n)&&!RES.includes(n)&&!n.startsWith('anon.');
+let ctl,nt;async function avail(n){if(ctl)ctl.abort();ctl=new AbortController();try{const r=await fetch(`${DB}/usernames/${n}?key=${FB.key}`,{signal:ctl.signal});if(r.status===404)return true;if(r.ok)return false;return null}catch(e){return e.name==='AbortError'?undefined:null}}
+$('#un').addEventListener('input',e=>{e.target.value=e.target.value.toLowerCase().replace(/[^a-z0-9._]/g,'');clearTimeout(nt);const n=e.target.value,s=$('#us');
+if(!n){s.textContent='';s.className='st';return}
+if(!/^[a-z0-9._]{3,20}$/.test(n)||/^\.|\.$|\.\./.test(n)){s.textContent='3-20 letters, numbers, dots or underscores';s.className='st';return}
+if(!okU(n)){s.textContent='that one’s taken';s.className='st no';return}
+s.textContent='checking…';s.className='st';
+nt=setTimeout(async()=>{const a=await avail(n);if($('#un').value!==n||a===undefined)return;if(a===false){s.textContent='that one’s taken';s.className='st no'}else{s.textContent=a?'@'+n+' is available':'@'+n+' looks good. we’ll confirm when you save';s.className='st ok'}},400)});
+$('#hform').addEventListener('submit',e=>{e.preventDefault();const v=$('#hmail').value.trim();if(v)$('#em').value=v;$('#join').scrollIntoView({behavior:'smooth'});setTimeout(()=>$(v?'#pw':'#em').focus({preventScroll:true}),600)});
+function setMode(m){MODE=m;$('#tSign').classList.toggle('on',m==='sign');$('#tLog').classList.toggle('on',m==='log');$('#signOnly').hidden=m==='log';$('#forgot').hidden=m!=='log';$('#sbtn').textContent=m==='log'?'log in':'create my account';$('#pw').autocomplete=m==='log'?'current-password':'new-password';$('#err').textContent=''}
+$('#tSign').onclick=()=>setMode('sign');$('#tLog').onclick=()=>setMode('log');
+$('#forgot').onclick=async()=>{const em=$('#em').value.trim().toLowerCase(),er=$('#err');if(!em)return er.textContent='type your email first';try{await jpost(`${IDT}:sendOobCode?key=${FB.key}`,{requestType:'PASSWORD_RESET',email:em})}catch(e){}er.className='st ok';er.textContent='if that account exists, a reset link is on its way.'};
+async function sendVerify(){try{await jpost(`${IDT}:sendOobCode?key=${FB.key}`,{requestType:'VERIFY_EMAIL',idToken:await token()})}catch(e){}}
+async function checkVer(){await token(true);if(!AUTH)return false;try{const j=await jpost(`${IDT}:lookup?key=${FB.key}`,{idToken:AUTH.id});VER=!!(j.users&&j.users[0]&&j.users[0].emailVerified)}catch(e){}return VER}
+$('#jform').addEventListener('submit',async e=>{e.preventDefault();const em=$('#em').value.trim().toLowerCase(),pw=$('#pw').value,er=$('#err'),bt=$('#sbtn');er.className='st no';er.textContent='';
+if(MODE==='log'){if(!em||!pw)return er.textContent='enter your email and password';bt.disabled=true;bt.textContent='logging in…';
+try{setAuth(await jpost(`${IDT}:signInWithPassword?key=${FB.key}`,{email:em,password:pw,returnSecureToken:true}));await boot(false)}catch(x){er.textContent=errMsg(x)}bt.disabled=false;bt.textContent='log in';return}
+const un=$('#un').value;
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em))return er.textContent='enter a valid email';
+if(!AUTH&&pw.length<8)return er.textContent='password needs 8+ characters';
+if(!okU(un))return er.textContent='pick an available username';
+if(!$('#age').checked)return er.textContent='you need to be 13 or older';
+bt.disabled=true;bt.textContent='creating…';
+try{if(!AUTH)setAuth(await jpost(`${IDT}:signUp?key=${FB.key}`,{email:em,password:pw,returnSecureToken:true}));
+const uid=AUTH.uid,r=rand(6),code='POP-'+r.toUpperCase();let ref=REF;if(ref&&await getCount('referrals/'+ref)===null)ref='';
+const w=[W('usernames/'+un,{owner:Fs(uid)},['createdAt']),W('users/'+uid,{username:Fs(un),code:Fs(code),minor:Fb($('#minor').checked)},['createdAt']),W('userCodes/'+code,{uid:Fs(uid),username:Fs(un)}),
+W('waitlist/'+uid,{email:Fs(em),username:Fs(un),interests:Fa(picked),follows:Fa(ST.get('wp_follow',[])),city:Fs($('#ct').value.trim().slice(0,40)),ref:Fs(ref),code:Fs(code),age13:Fb(true),source:Fs('web')},['createdAt']),
+W('referrals/'+r,{count:{integerValue:'0'}}),INC('meta/stats')];if(ref)w.push(INC('referrals/'+ref));
+const res=await commit(w);ST.set('wp_pos',+res[5].transformResults[0].integerValue);sendVerify();await boot(true)}
+catch(x){er.textContent=x.code==='ALREADY_EXISTS'?'that username was just taken. pick another.':x.code==='PERMISSION_DENIED'?'signups open very soon. try again in a bit.':x.code?errMsg(x):'couldn’t save. check your connection.'}
+bt.disabled=false;bt.textContent='create my account'});
+// ---------- the app (signed in)
+const spc=$('#spc');let V={tab:'you',c:null,dm:null},timer;
+const stop=()=>clearInterval(timer),every=(f,ms)=>{stop();timer=setInterval(f,ms)};
+const avh=(c='cy')=>`<span class="ring ${c}"><span class="av" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>`;
+async function boot(fresh){
+if(!AUTH||!await token())return;
+let u=null;try{u=await getDoc('users/'+AUTH.uid)}catch(x){}
+if(!u){setMode('sign');$('#em').value=AUTH.email||'';$('#pwL').hidden=true;$('#err').className='st ok';$('#err').textContent='almost there. pick a username to finish your account.';return}
+ME={uid:AUTH.uid,username:u.username,code:u.code,r:u.code.slice(4).toLowerCase(),minor:u.minor};
+await checkVer();$('#jcard').hidden=true;spc.hidden=false;$('#navp').innerHTML='<span class="dot"></span>@'+esc(ME.username);
+V={tab:'you',c:null,dm:null};app();if(fresh)confetti();spc.scrollIntoView({behavior:'smooth',block:'center'});
+if(QJ){const c=QJ.toUpperCase();history.replaceState(null,'',base());joinCircle(c)}else if(QF){const c=QF.toUpperCase();history.replaceState(null,'',base());followCode(c)}}
+function app(){stop();spc.innerHTML=`<div class="app"><div class="ah"><span class="logo" style="font-size:20px">what’s poppin</span><button class="pill" style="padding:6px 12px" data-a="out">@${esc(ME.username)} · log out</button></div>${VER?'':`<div class="ban">verify your email to make circles, follow people and message. <button data-a="ver">i verified</button><button data-a="resend">resend</button></div>`}<div class="ab" id="ab"></div><nav class="abar">${[['you','user'],['circles','users'],['people','send']].map(t=>`<button data-a="tab" data-v="${t[0]}" class="${V.tab==t[0]?'on':''}">${ic(t[1])}${t[0]}</button>`).join('')}</nav></div>`;view()}
+function toast2(m){const t=document.createElement('div');t.className='pill';t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#fff;color:#000';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)}
+const view=()=>{stop();({you:vYou,circles:()=>V.c?vCircle():vCircles(),people:()=>V.dm?vDm():vPeople()})[V.tab]()};
+const ab=h=>{$('#ab').innerHTML=h};
+function vYou(){const link=base()+'?follow='+ME.code,pos=ST.get('wp_pos',0);
+ab(`<div class="c" style="padding-top:8px">${avh()}<h3 style="margin-top:8px">@${esc(ME.username)}</h3><p class="fine">${ME.minor?'under 18 account · private by default':'early access member'}${pos?' · #'+pos.toLocaleString()+' on the list':''}</p></div>
+<div class="cbox"><small>your access code</small><div class="code">${ME.code}</div><div class="duo2"><button data-a="copy" data-v="${ME.code}">copy code</button><button data-a="copy" data-v="${link}">copy link</button><button data-a="share" data-v="${link}" data-t="follow me on what’s poppin">share</button></div></div>
+<div class="qrb">${qrSvg(link)}</div><p class="fine">scan to follow you. once someone follows you, you can message each other.</p>
+<div class="meter"><i id="mt"></i></div><p class="fine"><b id="rf">0</b> of 5 friends joined with your invite · each moves you up 3 spots</p>
+<div class="cbox" style="text-align:left"><small>invite link for the waitlist</small><div class="ref" style="margin-top:8px"><code>${base()}?ref=${ME.r}</code><button class="btn sm" data-a="copy" data-v="${base()}?ref=${ME.r}">copy</button></div></div>`);
+const t=async()=>{const n=await getCount('referrals/'+ME.r);if(n!==null&&$('#rf')){$('#rf').textContent=n;$('#mt').style.width=Math.min(n,5)*20+'%'}};t();every(t,25000)}
+async function vCircles(){ab('<p class="fine" style="padding:20px 0">loading…</p>');let L=[];try{L=await listDocs('users/'+ME.uid+'/circles')}catch(x){}
+ab(`<div class="hd2"><h3 style="flex:1">circles</h3><button class="btn sm" data-a="newc">make one</button></div>
+<div id="nc" hidden class="cbox" style="text-align:left"><input class="in" id="cn" placeholder="name it anything" maxlength="40" style="margin-bottom:8px"><input class="in" id="cd" placeholder="what’s it for? (optional)" maxlength="140" style="margin-bottom:10px"><button class="btn sm" data-a="mk" style="width:100%">create circle</button></div>
+${L.length?L.map(c=>`<div class="li" data-a="open" data-v="${c._id}"><span class="ring ${c.role=='owner'?'an':'cy'}"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${esc(c.name)}<small>${c.role=='owner'?'you own this':'following along'} · ${esc(c._id)}</small></div></div>`).join(''):'<p class="fine" style="padding:16px 0">no circles yet. make one, or join with a code.</p>'}
+<div class="cbox" style="text-align:left"><small>have a circle code?</small><div class="minil" style="margin-top:8px"><input class="in" id="jc" placeholder="CIR-XXXXXX" style="text-transform:uppercase"><button class="btn sm" data-a="join">join</button></div></div>`)}
+async function vCircle(){const code=V.c;ab('<p class="fine" style="padding:20px 0">loading…</p>');let c=null;try{c=await getDoc('circles/'+code)}catch(x){}
+if(!c){V.c=null;return vCircles()}const own=c.owner===ME.uid,link=base()+'?join='+code;
+ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><div style="flex:1"><h3>${esc(c.name)}</h3><p class="fine">${own?'you own this':'owner · @'+esc(c.ownerName)}${c.desc?' · '+esc(c.desc):''}</p></div></div>
+<div class="cbox"><small>circle code</small><div class="code" style="font-size:26px">${esc(code)}</div><div class="duo2"><button data-a="copy" data-v="${esc(code)}">copy code</button><button data-a="copy" data-v="${esc(link)}">copy link</button><button data-a="share" data-v="${esc(link)}" data-t="join ${esc(c.name)} on what’s poppin">share</button></div></div>
+<div class="qrb" style="width:150px">${qrSvg(link)}</div><p class="fine">scan to join</p>
+<div class="msgs" id="feed"></div>
+${own?`<div class="cmp"><input class="in" id="pm" placeholder="send an update to everyone" maxlength="500"><button data-a="post" aria-label="send">${ic('send')}</button></div>`:`<div class="lockb">${ic('lock')}only ${esc(c.ownerName)} can post here. you can read along.</div><button class="fine" data-a="leave" style="margin:14px auto;display:block;text-decoration:underline">leave circle</button>`}`);
+const f=async()=>{let P=[];try{P=await listDocs('circles/'+code+'/posts','orderBy=at%20desc&pageSize=60')}catch(x){}const el=$('#feed');if(!el)return;el.innerHTML=P.length?[...P].reverse().map(p=>`<div class="bb2">${esc(p.text)}<small>${esc(c.ownerName)} · ${ago(p.at)}</small></div>`).join(''):`<p class="fine" style="text-align:center">${own?'nothing yet. post the first update.':'no updates yet.'}</p>`};f();every(f,5000)}
+async function vPeople(){ab('<p class="fine" style="padding:20px 0">loading…</p>');let a=[],b=[];try{[a,b]=await Promise.all([listDocs('users/'+ME.uid+'/following'),listDocs('users/'+ME.uid+'/followers')])}catch(x){}
+const row=(p,s)=>`<div class="li" data-a="dm" data-v="${p._id}" data-n="${esc(p.username)}">${avh('')}<div class="bd">@${esc(p.username)}<small>${s}</small></div>${ic('send')}</div>`;
+ab(`<h3 style="margin:6px 0 10px">people</h3><div class="cbox" style="text-align:left"><small>follow someone with their code</small><div class="minil" style="margin-top:8px"><input class="in" id="fc2" placeholder="POP-XXXXXX" style="text-transform:uppercase"><button class="btn sm" data-a="fol">follow</button></div></div>
+<p class="fine" style="margin:14px 0 2px">following · tap to message</p>${a.length?a.map(p=>row(p,'you follow them')).join(''):'<p class="fine" style="padding:8px 0">nobody yet.</p>'}
+<p class="fine" style="margin:14px 0 2px">followers</p>${b.length?b.map(p=>row(p,'follows you')).join(''):'<p class="fine" style="padding:8px 0">nobody yet. share your code.</p>'}`)}
+async function vDm(){const o=V.dm,pair=[ME.uid,o.uid].sort().join('_');
+ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><h3 style="flex:1">@${esc(o.name)}</h3></div><div class="msgs" id="thr"></div><div class="cmp"><input class="in" id="dm" placeholder="message" maxlength="1000"><button data-a="send" aria-label="send">${ic('send')}</button></div><p class="st no" id="derr"></p>`);
+const f=async()=>{let M=[];try{M=await listDocs('dms/'+pair+'/messages','orderBy=at%20desc&pageSize=60')}catch(x){}const el=$('#thr');if(!el)return;el.innerHTML=M.length?[...M].reverse().map(m=>`<div class="bb2 ${m.from===ME.uid?'me':''}">${esc(m.text)}<small>${ago(m.at)}</small></div>`).join(''):'<p class="fine" style="text-align:center">say hi.</p>';el.scrollTop=el.scrollHeight};f();every(f,4000)}
+async function followCode(code){try{const t=await getDoc('userCodes/'+code);if(!t)return toast2('code not found');if(t.uid===ME.uid)return toast2('that’s your own code');
+await commit([W(`users/${ME.uid}/following/${t.uid}`,{username:Fs(t.username)},['at']),W(`users/${t.uid}/followers/${ME.uid}`,{username:Fs(ME.username)},['at'])]);toast2('following @'+t.username+'. you can message them now');V.tab='people';app()}
+catch(x){toast2(x.code==='ALREADY_EXISTS'?'you already follow them':x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t follow. try again')}}
+async function joinCircle(code){try{const c=await getDoc('circles/'+code);if(!c)return toast2('circle not found');
+await commit([W(`circles/${code}/members/${ME.uid}`,{},['at']),W(`users/${ME.uid}/circles/${code}`,{name:Fs(c.name),role:Fs(c.owner===ME.uid?'owner':'member')},['at'])]);toast2('joined '+c.name);V={tab:'circles',c:code,dm:null};app()}
+catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2('couldn’t join. try again')}}
+const acts={
+tab:d=>{V={tab:d.v,c:null,dm:null};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
+newc:()=>{$('#nc').hidden=!$('#nc').hidden},
+async mk(){const name=$('#cn').value.trim(),desc=$('#cd').value.trim();if(name.length<2)return toast2('give it a name');const code='CIR-'+rand(6).toUpperCase();
+try{await commit([W('circles/'+code,{name:Fs(name),desc:Fs(desc),owner:Fs(ME.uid),ownerName:Fs(ME.username)},['createdAt']),W(`circles/${code}/members/${ME.uid}`,{},['at']),W(`users/${ME.uid}/circles/${code}`,{name:Fs(name),role:Fs('owner')},['at'])]);V.c=code;view();confetti()}
+catch(x){toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t create it. try again')}},
+join:()=>{const c=($('#jc').value||'').trim().toUpperCase();if(c)joinCircle(c)},fol:()=>{const c=($('#fc2').value||'').trim().toUpperCase();if(c)followCode(c)},
+async post(){const t=$('#pm').value.trim();if(!t)return;try{await commit([W(`circles/${V.c}/posts/${rand(10)}`,{text:Fs(t),by:Fs(ME.uid)},['at'])]);$('#pm').value='';view()}catch(x){toast2('couldn’t post. verify your email first.')}},
+async send(){const t=$('#dm').value.trim();if(!t)return;const o=V.dm,pair=[ME.uid,o.uid].sort().join('_');try{await commit([W(`dms/${pair}/messages/${rand(10)}`,{text:Fs(t),from:Fs(ME.uid)},['at'])]);$('#dm').value='';$('#derr').textContent='';view()}catch(x){$('#derr').textContent=x.code==='PERMISSION_DENIED'?'you need to follow each other, and verify your email, to message.':'couldn’t send.'}},
+async leave(){try{await commit([{delete:nm(`circles/${V.c}/members/${ME.uid}`)},{delete:nm(`users/${ME.uid}/circles/${V.c}`)}]);V.c=null;view()}catch(x){toast2('couldn’t leave')}},
+async copy(d){try{await navigator.clipboard.writeText(d.v);toast2('copied')}catch(x){toast2('press and hold to copy')}},
+share:d=>navigator.share?navigator.share({title:'what’s poppin',text:d.t,url:d.v}).catch(()=>{}):acts.copy(d),
+async ver(){toast2((await checkVer())?'verified. you’re good.':'not verified yet. open the email link first.');if(VER)app()},
+async resend(){await sendVerify();toast2('sent again')},
+out:()=>{stop();AUTH=null;ME=null;ST.set('wp_auth',null);location.href=base()}};
+spc.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&acts[b.dataset.a])acts[b.dataset.a](b.dataset)});
+spc.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('#pm,#dm,#jc,#fc2,#cn,#cd')){e.preventDefault();({pm:'post',dm:'send',jc:'join',fc2:'fol',cn:'mk',cd:'mk'})[e.target.id]&&acts[({pm:'post',dm:'send',jc:'join',fc2:'fol',cn:'mk',cd:'mk'})[e.target.id]]()}});
+if(QJ||QF){setMode('sign');const er=$('#err');er.className='st ok';er.textContent=QJ?'create an account (or log in) to join this circle.':'create an account (or log in) to follow them.'}
+boot(false);
+</script></body></html>
