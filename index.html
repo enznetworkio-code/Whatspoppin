@@ -121,32 +121,6 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 .hd2{display:flex;align-items:center;gap:10px;margin:6px 0 4px}.hd2 button{padding:6px}
 .minil{display:flex;gap:8px}.minil .in{flex:1;text-transform:none}
 
-/* ---- flyer-wall polish: hard shadows, tape, stickers, grain ---- */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.07;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
-.glow{display:none}
-.grad{background:none;color:#fff;-webkit-background-clip:border-box;background-clip:border-box;box-shadow:inset 0 -.26em 0 var(--p);padding:0 .06em}
-h1{letter-spacing:-.065em}
-.rot{background:var(--cy);color:#000;padding:.02em .2em .08em;border-radius:.14em;transform:rotate(-2.2deg);box-shadow:5px 5px 0 var(--p);margin-top:.12em}.rot.out{transform:rotate(-2.2deg) translateY(.25em)}
-.lead{font-size:clamp(18px,2vw,21px)}
-.hform{border:2px solid #fff;box-shadow:6px 6px 0 var(--p);background:#000}
-.btn{box-shadow:4px 4px 0 #fff;border:2px solid #fff;transition:transform .12s,box-shadow .12s}.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #fff;background:var(--p)}.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #fff}.btn.g,.btn.on{box-shadow:none;border-color:var(--s3)}
-.pill{border-radius:10px}
-.phone{animation:none;transform:rotate(3deg);box-shadow:0 0 0 7px #0c0c10,14px 16px 0 7px var(--p)}
-.eyebrow{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;letter-spacing:.08em;color:var(--cy)}.eyebrow::before{content:"// "}
-.card{border:2px solid var(--s3);border-radius:20px;background:#0a0a0d;transition:transform .15s,box-shadow .15s,border-color .15s}
-.card:nth-child(odd){transform:rotate(-.5deg)}.card:nth-child(even){transform:rotate(.45deg)}
-.card:hover{transform:rotate(0) translateY(-3px);border-color:#fff;box-shadow:7px 7px 0 var(--p)}.card::after{display:none}
-.card::before{content:"";position:absolute;top:-1px;left:50%;width:74px;height:20px;transform:translateX(-50%) rotate(-3deg);background:rgba(255,255,255,.14);border-radius:2px;pointer-events:none}
-.tag{border-radius:6px;background:transparent;border:1.5px dashed currentColor;transform:rotate(-2deg);letter-spacing:.04em}
-.step{border-top:3px solid #fff}.step em{background:none;color:transparent;-webkit-text-stroke:2px var(--cy)}.step:nth-child(2) em{-webkit-text-stroke-color:var(--p)}.step:nth-child(3) em{-webkit-text-stroke-color:#ec4899}
-.tick{background:var(--cy);border:0;transform:rotate(-1.4deg);margin:10px -30px 18px;padding:12px 0}.tick div{color:#000;font-weight:800}.tick span::after{background:#000}
-.join{border-radius:26px;background:#fff;padding:3px;box-shadow:10px 10px 0 var(--p)}
-.ticket{border-radius:20px;border:2px dashed var(--s3)}
-.cbox{border-radius:16px;border:2px solid var(--s3)}.qrb{border-radius:14px}
-footer .logo{color:var(--cy)}
-@media(max-width:700px){.card:nth-child(n){transform:none}.tick{margin-inline:-24px}.phone{transform:rotate(2deg)}}
-@media(prefers-reduced-motion:reduce){.card,.phone,.rot,.tick{transform:none!important}}
-
 /* ---- mini app tabs + motion ---- */
 @keyframes rise{from{opacity:0;transform:translateY(16px) scale(.98)}}
 @keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
@@ -184,6 +158,16 @@ footer .logo{color:var(--cy)}
 .pc:hover{transform:none}
 .card:nth-child(n):hover{transform:none}
 .fm.pop .hb{animation:burst .5s ease-out}
+
+/* ---- clean pass ---- */
+.grad{color:#a78bfa;background:none;-webkit-background-clip:border-box;background-clip:border-box}
+.rot{color:var(--cy)}
+.eyebrow{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;letter-spacing:.08em;color:var(--cy)}.eyebrow::before{content:"// "}
+.card{border-radius:24px}
+.phone{transform:rotate(2deg)}
+.step em{background:none;color:var(--p)}.step:nth-child(2) em{color:var(--cy)}.step:nth-child(3) em{color:#ec4899}
+@media(max-width:700px){.phone{transform:none}}
+.fh button{margin-left:auto;text-decoration:underline}#pv{width:100%;border-radius:14px;margin:8px 0;display:block}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
@@ -413,9 +397,16 @@ bt.disabled=false;bt.textContent='create my account'});
 // ---------- the app (signed in)
 
 // ---------- mini-app: nearby feed + activity
-const FEED=[['dre','cy','#3b3a4a','house party getting loud','main st · 0.2mi','2m',142,'assets/img1.jpg'],['anon.3827','an','#52525b','open mic just started','~0.4mi','6m',58,'assets/img2.jpg'],['mari','cy','#4a3b3b','beer pong 2 spots left','oak blvd · 0.9mi','12m',97,'assets/img3.jpg']];
-let LK=ST.get('wp_likes',[]),ACT=[],actT;
-function vNearby(){ab(`<p class="fine" style="margin:6px 0 12px">near you right now · demo posts. tap a photo to like it.</p>`+FEED.map((p,i)=>`<div class="fp"><div class="fh"><span class="ring ${p[1]}"><span class="av s" style="background:${p[2]}"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${p[0]}<small>${p[4]} · ${p[5]}</small></div></div><div class="fm" data-a="like" data-v="${i}"><img src="${p[7]}" alt="" loading="lazy" onerror="this.remove()"><b class="cap">${p[3]}</b><i class="hb">${ic('heart','f')}</i></div><div class="fa"><button data-a="like" data-v="${i}" class="${LK.includes(i)?'on':''}">${ic('heart',LK.includes(i)?'f':'')}<span>${p[6]+(LK.includes(i)?1:0)}</span></button></div></div>`).join(''))}
+let ACT=[],actT,PIMG='';
+const pcard=(p,L)=>{const mine=L.some(l=>l._id===ME.uid),own=p.owner===ME.uid,an=String(p.name).startsWith('anon.'),im=String(p.img).startsWith('data:image/jpeg;base64,')?esc(p.img):'';
+return `<div class="fp"><div class="fh"><span class="ring ${an?'an':'cy'}"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${esc(p.name)}<small>${ago(p.at)}</small></div><button class="fine" data-a="${own?'dp':'rp'}" data-v="${p._id}">${own?'delete':'report'}</button></div><div class="fm" data-a="lk" data-v="${p._id}"><img src="${im}" alt=""><i class="hb">${ic('heart','f')}</i>${p.text?`<b class="cap">${esc(p.text)}</b>`:''}</div><div class="fa"><button data-a="lk" data-v="${p._id}" data-m="${mine?1:0}" class="${mine?'on':''}">${ic('heart',mine?'f':'')}<span>${L.length}</span></button></div></div>`};
+async function vNearby(){const n=VN;ab('<p class="fine" style="padding:20px 0">loading…</p>');let P=[];
+try{const cut=Date.now()-864e5;P=(await listDocs('posts','orderBy=at%20desc&pageSize=10')).filter(p=>p.at&&+new Date(p.at)>cut)}catch(e){}
+const L=await Promise.all(P.map(p=>listDocs('posts/'+p._id+'/likes','pageSize=100').catch(()=>[])));if(n!==VN)return;
+ab(`<div class="hd2"><h3 style="flex:1">nearby</h3><button class="btn sm" data-a="newp">+ post</button></div>
+<div id="np" hidden class="cbox" style="text-align:left"><input id="pf" type="file" accept="image/*" style="font-size:14px;max-width:100%"><img id="pv" hidden alt=""><input class="in" id="pc" placeholder="what’s going on? (optional)" maxlength="140" style="margin:8px 0"><label class="chk" style="margin:4px 0 10px"><input type="checkbox" id="pa" checked><span>post as anon</span></label><button class="btn sm" data-a="mkp" style="width:100%">post it</button></div>
+<p class="fine" style="margin:2px 0 12px">posts from early members. gone after 24 hours.</p>`+(P.length?P.map((p,i)=>pcard(p,L[i])).join(''):'<p class="fine" style="padding:30px 0;text-align:center">nothing posted yet. be the first.</p>'))}
+function prep(f){if(!f)return;const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,720/Math.max(im.width,im.height)),w=Math.round(im.width*k),h=Math.round(im.height*k),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);let q=.75,d=c.toDataURL('image/jpeg',q);while(d.length>150000&&q>.3){q-=.1;d=c.toDataURL('image/jpeg',q)}URL.revokeObjectURL(u);if(d.length>150000||!d.startsWith('data:image/jpeg'))return toast2('that photo won’t shrink enough. try another');PIMG=d;const pv=$('#pv');pv.src=d;pv.hidden=false};im.onerror=()=>toast2('couldn’t read that photo');im.src=u}
 async function actItems(){const o=[];
 try{(await listDocs('users/'+ME.uid+'/followers')).forEach(f=>o.push({i:'users',x:'<b>@'+esc(f.username)+'</b> followed you',at:f.at}))}catch(e){}
 try{const L=await listDocs('users/'+ME.uid+'/circles');await Promise.all(L.map(async c=>{if(c.role==='owner'){try{(await listDocs('circles/'+c._id+'/members')).filter(m=>m._id!==ME.uid).forEach(m=>o.push({i:'users',x:'someone joined <b>'+esc(c.name)+'</b>',at:m.at}))}catch(e){}}else{try{const P=await listDocs('circles/'+c._id+'/posts','orderBy=at%20desc&pageSize=1');if(P[0])o.push({i:'send',x:'new update in <b>'+esc(c.name)+'</b>: '+esc(String(P[0].text).slice(0,60)),at:P[0].at})}catch(e){}}}))}catch(e){}
@@ -482,7 +473,14 @@ async function joinCircle(code){code=cc(code);if(!code)return;try{const c=await 
 await commit([W(`circles/${code}/members/${ME.uid}`,{},['at']),W(`users/${ME.uid}/circles/${code}`,{name:Fs(c.name),role:Fs(c.owner===ME.uid?'owner':'member')},['at'])]);toast2('joined '+c.name);V={tab:'circles',c:code,dm:null};app()}
 catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t join. try again')}}
 const acts={
-like:d=>{const i=+d.v,on=!LK.includes(i);LK=on?[...LK,i]:LK.filter(x=>x!=i);ST.set('wp_likes',LK);const m=$$('.fm')[i],b=$$('.fa button')[i];m.classList.remove('pop');if(on){void m.offsetWidth;m.classList.add('pop')}b.classList.toggle('on',on);b.innerHTML=ic('heart',on?'f':'')+'<span>'+(FEED[i][6]+(on?1:0))+'</span>'},
+newp:()=>{$('#np').hidden=!$('#np').hidden},
+async mkp(){if(!PIMG)return toast2('pick a photo first');if(!VER)return toast2('verify your email first');const an=$('#pa').checked,name=an?'anon.'+String([...ME.uid].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7)%10000).padStart(4,'0'):ME.username;
+try{await commit([W('posts/'+rand(12),{owner:Fs(ME.uid),name:Fs(name),text:Fs($('#pc').value.trim().slice(0,140)),img:Fs(PIMG)},['at'])]);PIMG='';toast2('posted');view()}catch(x){toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t post. try again')}},
+async lk(d){const id=d.v,b=$(`.fa button[data-v="${id}"]`),m=$(`.fm[data-v="${id}"]`);if(!b)return;const on=b.dataset.m!=='1';
+try{await commit(on?[W(`posts/${id}/likes/${ME.uid}`,{},['at'])]:[{delete:nm(`posts/${id}/likes/${ME.uid}`)}])}catch(x){if(x.code!=='ALREADY_EXISTS')return toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t like')}
+const c=+b.querySelector('span').textContent+(on?1:-1);b.dataset.m=on?1:0;b.classList.toggle('on',on);b.innerHTML=ic('heart',on?'f':'')+'<span>'+Math.max(0,c)+'</span>';m.classList.remove('pop');if(on){void m.offsetWidth;m.classList.add('pop')}},
+async dp(d){if(!confirm('delete this post?'))return;try{await commit([{delete:nm('posts/'+d.v)}]);view()}catch(x){toast2('couldn’t delete')}},
+async rp(d){try{await commit([W('reports/'+rand(12),{post:Fs(d.v),by:Fs(ME.uid)},['at'])]);toast2('reported. thanks for flagging it')}catch(x){toast2('verify your email first')}},
 tab:d=>{V={tab:d.v,c:null,dm:null};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
 newc:()=>{$('#nc').hidden=!$('#nc').hidden},
 async mk(){const name=$('#cn').value.trim(),desc=$('#cd').value.trim();if(name.length<2)return toast2('give it a name');const code='CIR-'+rand(6).toUpperCase();
@@ -497,6 +495,7 @@ share:d=>navigator.share?navigator.share({title:'what’s poppin',text:d.t,url:d
 async ver(){toast2((await checkVer())?'verified. you’re good.':'not verified yet. open the email link first.');if(VER){app();runPend()}},
 async resend(){await sendVerify();toast2('sent again')},
 out:()=>{stop();clearInterval(actT);AUTH=null;ME=null;ST.set('wp_auth',null);location.href=base()}};
+spc.addEventListener('change',e=>{if(e.target.id==='pf')prep(e.target.files[0])});
 spc.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&acts[b.dataset.a])acts[b.dataset.a](b.dataset)});
 spc.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('#pm,#dm,#jc,#fc2,#cn,#cd')){e.preventDefault();({pm:'post',dm:'send',jc:'join',fc2:'fol',cn:'mk',cd:'mk'})[e.target.id]&&acts[({pm:'post',dm:'send',jc:'join',fc2:'fol',cn:'mk',cd:'mk'})[e.target.id]]()}});
 if(QJ||QF){setMode('sign');const er=$('#err');er.className='st ok';er.textContent=QJ?'create an account (or log in) to join this circle.':'create an account (or log in) to follow them.'}
