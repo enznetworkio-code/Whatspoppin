@@ -189,6 +189,18 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 .empty2{text-align:center;color:var(--mu);padding:44px 20px}.empty2 svg{width:34px;height:34px;color:var(--p);margin-bottom:10px}
 #pwt{display:block;margin-top:8px;text-decoration:underline}.pill img.pp{width:20px;height:20px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px}
 .btn:disabled{cursor:default}
+
+/* ---- people: find, follow, rows ---- */
+.fnd{display:flex;align-items:center;gap:14px;max-width:520px;padding:14px;border:1px solid var(--s3);border-radius:22px;background:var(--s1)}.fnd .bd{flex:1;min-width:0;font-weight:700;overflow:hidden;text-overflow:ellipsis}.fnd small{display:block;color:var(--mu);font-weight:500;font-size:13px}
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.way{border-top:1px solid var(--s3);padding-top:18px}.way svg{color:var(--cy);width:24px;height:24px}.way h3{font-size:20px;letter-spacing:-.03em;margin:10px 0 4px}.way p{color:var(--mu);font-size:15px}
+@media(max-width:700px){.ways{grid-template-columns:1fr}}
+.pfp.sm{width:44px;height:44px;border-width:2px}.pfp.sm.d svg{width:26px;height:26px}
+.mb{padding:7px 14px;border-radius:99px;background:var(--s3);font-weight:700;font-size:13px;flex:none}.mb.pr{background:var(--p);color:#fff}
+.rmx{color:var(--mu);font-size:12px;text-decoration:underline;padding:4px;flex:none}
+.fchip{padding:3px 11px;border-radius:99px;border:1px solid var(--p);color:#c4b5fd;font-weight:700;font-size:12px}.fchip.on{background:var(--s3);border-color:var(--s3);color:var(--mu)}
+.fh .fchip{margin-left:auto;text-decoration:none}.fh .fchip+button{margin-left:10px}
+.tabs2 button:disabled{opacity:.5}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
@@ -207,6 +219,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
 <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
 <symbol id="copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></symbol>
+<symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
 <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 <symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.8a3.5 3.5 0 010 6.4M18 14a6 6 0 013.5 6"/></symbol>
 <symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h13l-2 4 2 4H5"/></symbol>
@@ -236,7 +249,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <div class="mini" id="mini"><div class="lb">map <span style="color:var(--mu);font-weight:600">6 posts near you</span></div><div class="op">open</div></div>
 <div class="tb"><span class="on">nearby</span><span>circle</span><span>hot</span></div>
 <div class="pp"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div>dre<small><b>circle</b> · 0.2mi · 2m</small></div></div>
-<div class="med"><img class="ph-img" src="assets/img1.jpg" alt="" loading="eager"><div class="cap">house party getting loud</div></div>
+<div class="med"><img class="ph-img" onerror="this.remove()" src="assets/img1.jpg" alt="" loading="eager"><div class="cap">house party getting loud</div></div>
 <div class="bar"><svg class="i f on"><use href="#home"/></svg><svg class="i"><use href="#pin"/></svg><span class="pl"><svg class="i" style="stroke-width:2.6"><use href="#plus"/></svg></span><svg class="i"><use href="#qrc"/></svg><svg class="i"><use href="#user"/></svg></div>
 </div></div>
 </div>
@@ -252,8 +265,8 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <article class="card c4 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#users"/></svg>story viewer</span>
 <h3>tap through the night. circle or stranger, it changes everything.</h3><p>full-screen posts you move through like stories. people in your circle get a cyan ring and a real dm. strangers stay anonymous and can only send quick reactions.</p>
 <div class="duo">
-<div class="vw"><div class="story"><img class="ph-img" src="assets/img2.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>dre <span class="tag cy">circle</span></div><div class="dock"><div class="msg">message dre…</div><div class="sendb"><svg class="i"><use href="#send"/></svg></div></div></div><p class="lab">your circle: real dms</p></div>
-<div class="vw"><div class="story"><img class="ph-img" src="assets/img3.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>anon.0914 <span class="tag an">anonymous</span></div><div class="dock"><div class="rx"><span><svg class="i"><use href="#flame"/></svg></span><span><svg class="i"><use href="#bolt"/></svg></span><span><svg class="i"><use href="#eye"/></svg></span><span><svg class="i"><use href="#heart"/></svg></span></div></div></div><p class="lab">strangers: anonymous reactions</p></div>
+<div class="vw"><div class="story"><img class="ph-img" onerror="this.remove()" src="assets/img2.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring cy"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>dre <span class="tag cy">circle</span></div><div class="dock"><div class="msg">message dre…</div><div class="sendb"><svg class="i"><use href="#send"/></svg></div></div></div><p class="lab">your circle: real dms</p></div>
+<div class="vw"><div class="story"><img class="ph-img" onerror="this.remove()" src="assets/img3.jpg" alt="" loading="lazy"><div class="pg"><i></i><i></i><i></i></div><div class="who"><span class="ring an"><span class="av s" style="background:#52525b"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span>anon.0914 <span class="tag an">anonymous</span></div><div class="dock"><div class="rx"><span><svg class="i"><use href="#flame"/></svg></span><span><svg class="i"><use href="#bolt"/></svg></span><span><svg class="i"><use href="#eye"/></svg></span><span><svg class="i"><use href="#heart"/></svg></span></div></div></div><p class="lab">strangers: anonymous reactions</p></div>
 </div></article>
 
 <article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#pin"/></svg>map</span>
@@ -283,11 +296,16 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <div class="step rv"><em>03</em><h3>let it vanish</h3><p>24 hours later it’s gone. no archive, no awkward scroll back.</p></div>
 </div></div></section>
 
-<section style="padding-top:20px"><div class="wrap">
-<p class="eyebrow rv">follow before launch</p><h2 class="rv">follow the people <span class="grad">who’ll be poppin first.</span></h2>
-<p class="sub rv">follow now and your feed won’t be empty on day one. <span id="fc" style="color:var(--tx);font-weight:600"></span></p>
-<div class="people" id="people"></div>
-<div class="soc rv"><a class="pill" href="#">instagram <svg class="i" style="width:16px;height:16px"><use href="#arrow"/></svg></a><a class="pill" href="#">tiktok <svg class="i" style="width:16px;height:16px"><use href="#arrow"/></svg></a><a class="pill" href="#">x <svg class="i" style="width:16px;height:16px"><use href="#arrow"/></svg></a></div>
+<section id="find" style="padding-top:20px"><div class="wrap">
+<p class="eyebrow rv">find your people</p><h2 class="rv">follow real people <span class="grad">before day one.</span></h2>
+<p class="sub rv">search a username to see who’s already in. logged in, it’s a real follow. no account yet? we’ll follow them for you the moment you sign up.</p>
+<form class="hform rv" id="fform" novalidate><input id="fs" placeholder="search a username" aria-label="search a username" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="21"><button class="btn" type="submit">find</button></form>
+<div id="fr" aria-live="polite" style="min-height:70px"></div>
+<div class="ways">
+<div class="way rv"><svg class="i"><use href="#user"/></svg><h3>search a name</h3><p>type a username above, or inside the app. follow in one tap, unfollow any time.</p></div>
+<div class="way rv"><svg class="i"><use href="#qrc"/></svg><h3>scan in person</h3><p>every profile has its own qr. scan a friend’s and you’re following them.</p></div>
+<div class="way rv"><svg class="i"><use href="#send"/></svg><h3>follow each other to dm</h3><p>when you both follow, you can message. until then it’s reactions only.</p></div>
+</div>
 </div></section>
 
 <section id="join" style="padding-top:20px"><div class="wrap"><div id="spc" hidden></div><div class="join rv" id="jcard"><div class="jin">
@@ -313,6 +331,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <details class="rv"><summary>can people see exactly where i am?</summary><p>no. everyone only ever sees a shaded area about a third of a mile wide. private addresses are never shown, and location info expires with your post.</p></details>
 <details class="rv"><summary>if i post anonymously, am i untraceable?</summary><p>to other members, yes: an anonymous post gets a random anon name and nothing public connects it to your account. members can still report it, and we can remove it.</p></details>
 <details class="rv"><summary>who can use it?</summary><p>13 and up. accounts under 18 start private, only mutual follows can message them, and their location stays blurred.</p></details>
+<details class="rv"><summary>how do followers work?</summary><p>follow someone by searching their username, scanning their qr or opening their link. when you both follow each other you can message. you can unfollow or remove a follower any time.</p></details>
 <details class="rv"><summary>what does it cost?</summary><p>free. early members get their username locked and a head start in their city.</p></details>
 </div></div></section>
 <footer><div class="wrap"><span class="logo" style="font-size:20px">what’s poppin</span><span>© 2026 what’s poppin · built for good nights</span><a href="#faq" style="text-decoration:underline">privacy &amp; safety questions</a></div></footer>
@@ -337,13 +356,6 @@ $('#map').insertAdjacentHTML('afterbegin',bub.slice(0,4).map((b,i)=>`<span class
 {let g='';for(let i=0;i<441;i++){const x=i%21,y=(i/21)|0,f=(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);const on=f?(x%6==0||y%6==0||x==14||x==20||y==14||y==20||(x%6>1&&x%6<5&&y%6>1&&y%6<5)):(x*7+y*13+x*y)%3==0;g+=`<i class="${on?'':'o'}"></i>`}$('#qr').innerHTML=g}
 // ticker
 {const t=['house party getting loud','taco truck line short rn','open mic just started','rooftop set is unreal tonight','street cypher going crazy','beer pong 2 spots left','ramen spot still open','someone brought a speaker'];const h=t.map(x=>`<span>${x}</span>`).join('');$('#mq').innerHTML=h+h}
-// follow
-const P=[['dre','circle','house parties and rooftop sets. the one who always knows.','#3b3a4a','cy'],['mari','circle','food trucks, taco lines and late-night finds.','#4a3b3b','cy'],['kj','host','plans the weekend. events land here first.','#334155','cy'],['poppin.hq','official','launch news, city drops and invite codes.','#2a1a40','an']];
-let fol=ST.get('wp_follow',[]);
-function drawPeople(){$('#people').innerHTML=P.map((p,i)=>`<div class="pc rv in"><span class="ring ${p[4]}" style="align-self:flex-start">${av(p[3])}</span><h4>${p[0]} <span class="tag ${p[4]=='an'?'an':'cy'}">${p[1]}</span></h4><p>${p[2]}</p><button class="btn sm ${fol.includes(p[0])?'on':''}" data-h="${p[0]}">${fol.includes(p[0])?'following':'follow'}</button></div>`).join('');
-$('#fc').textContent=fol.length?`you’re following ${fol.length}.`:''}
-$('#people').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const h=b.dataset.h;fol=fol.includes(h)?fol.filter(x=>x!=h):[...fol,h];ST.set('wp_follow',fol);drawPeople()});
-drawPeople();
 // reveal
 {const els=$$('.rv:not(.in)');if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});els.forEach(e=>io.observe(e))}else els.forEach(e=>e.classList.add('in'))}
 // firebase (auth + firestore over REST, no SDK)
@@ -411,20 +423,36 @@ bt.disabled=true;bt.textContent='creating…';
 try{if(!AUTH)setAuth(await jpost(`${IDT}:signUp?key=${FB.key}`,{email:em,password:pw,returnSecureToken:true}));
 const uid=AUTH.uid,r=rand(6),code='POP-'+r.toUpperCase();let ref=REF;if(ref&&await getCount('referrals/'+ref)===null)ref='';
 const w=[W('usernames/'+un,{owner:Fs(uid)},['createdAt']),W('users/'+uid,{username:Fs(un),code:Fs(code),minor:Fb($('#minor').checked)},['createdAt']),W('userCodes/'+code,{uid:Fs(uid),username:Fs(un)}),
-W('waitlist/'+uid,{email:Fs(em),username:Fs(un),interests:Fa(picked),follows:Fa(ST.get('wp_follow',[])),city:Fs($('#ct').value.trim().slice(0,40)),ref:Fs(ref),code:Fs(code),age13:Fb(true),source:Fs('web')},['createdAt']),
+W('waitlist/'+uid,{email:Fs(em),username:Fs(un),interests:Fa(picked),follows:Fa((p=>p&&p.t==='u'?[p.c]:[])(ST.get('wp_pend',null))),city:Fs($('#ct').value.trim().slice(0,40)),ref:Fs(ref),code:Fs(code),age13:Fb(true),source:Fs('web')},['createdAt']),
 W('referrals/'+r,{count:{integerValue:'0'}}),INC('meta/stats')];if(ref)w.push(INC('referrals/'+ref));
 const res=await commit(w);ST.set('wp_pos',+res[5].transformResults[0].integerValue);sendVerify();await boot(true)}
 catch(x){er.textContent=x.code==='ALREADY_EXISTS'?'that username was just taken. pick another.':x.code==='PERMISSION_DENIED'?'signups open very soon. try again in a bit.':x.code?errMsg(x):'couldn’t save. check your connection.'}
 bt.disabled=false;bt.textContent='create my account'});
+// ---------- find people (landing)
+const unOK=n=>/^[a-z0-9._]{3,20}$/.test(n)&&!/^\.|\.$|\.\./.test(n);
+async function lookUser(n){try{const r=await fetch(`${DB}/usernames/${n}?key=${FB.key}`);if(r.status===404)return null;if(!r.ok)return undefined;return D(await r.json())}catch(e){return undefined}}
+let FOL=new Set();const PROF={};
+async function loadFol(){try{FOL=new Set((await listDocs('users/'+ME.uid+'/following')).map(x=>x.username))}catch(e){console.warn('whatspoppin: could not load following',e&&e.code||e)}}
+$('#fform').addEventListener('submit',async e=>{e.preventDefault();const n=$('#fs').value.trim().toLowerCase().replace(/^@/,''),o=$('#fr');
+if(!unOK(n))return o.innerHTML='<p class="st no">3-20 letters, numbers, dots or underscores.</p>';
+o.innerHTML='<p class="st">looking…</p>';const d=await lookUser(n);
+if(d===undefined)return o.innerHTML='<p class="st no">couldn’t check right now. try again.</p>';
+if(d===null)return o.innerHTML=`<div class="fnd"><div class="bd">@${esc(n)}<small>nobody has this one yet</small></div>${ME?'':`<button class="btn sm" data-fa="claim" data-n="${esc(n)}">claim it</button>`}</div>`;
+const mine=ME&&ME.username===n,fo=FOL.has(n);
+o.innerHTML=`<div class="fnd">${avh('')}<div class="bd">@${esc(n)}<small>early member</small></div>${mine?'<span class="tag">that’s you</span>':`<button class="btn sm${fo?' on':''}" data-fa="follow" data-n="${esc(n)}">${fo?'following':'follow'}</button>`}</div>`});
+$('#fr').addEventListener('click',async e=>{const b=e.target.closest('[data-fa]');if(!b)return;const n=b.dataset.n,er=$('#err');
+if(b.dataset.fa==='claim'){setMode('sign');$('#un').value=n;$('#un').dispatchEvent(new Event('input'));$('#join').scrollIntoView({behavior:'smooth'});return}
+if(ME){b.disabled=true;let ok;if(FOL.has(n)){const d=await lookUser(n);ok=d?await unfollowUser(d.owner,n):false}else{const d=await lookUser(n);ok=d?await followUser(d.owner,n):false}b.disabled=false;const fo=FOL.has(n);b.classList.toggle('on',fo);b.textContent=fo?'following':'follow';return}
+ST.set('wp_pend',{t:'u',c:n});setMode('sign');er.className='st ok';er.textContent='create an account or log in and we’ll follow @'+n+' for you.';$('#join').scrollIntoView({behavior:'smooth'})});
 // ---------- the app (signed in)
 
 // ---------- mini-app: nearby feed + activity
 let ACT=[],actT,PIMG='',MYP=new Set();
-const pcard=(p,L)=>{const mine=L.some(l=>l._id===ME.uid),own=MYP.has(p._id),an=String(p.name).startsWith('anon.'),im=String(p.img).startsWith('data:image/jpeg;base64,')?esc(p.img):'';
-return `<div class="fp"><div class="fh"><span class="ring ${an?'an':'cy'}"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${esc(p.name)}<small>${ago(p.at)}</small></div><button class="fine" data-a="${own?'dp':'rp'}" data-v="${p._id}">${own?'delete':'report'}</button></div><div class="fm" data-a="lk" data-v="${p._id}"><img src="${im}" alt="post photo" loading="lazy">${p.geo?locChip(p.geo):''}<i class="hb">${ic('heart','f')}</i>${p.text?`<b class="cap">${esc(p.text)}</b>`:''}</div><div class="fa"><button data-a="lk" data-v="${p._id}" data-m="${mine?1:0}" class="${mine?'on':''}">${ic('heart',mine?'f':'')}<span>${L.length}</span></button></div></div>`};
+const pcard=(p,L)=>{const mine=L.some(l=>l._id===ME.uid),own=MYP.has(p._id),fb0=!String(p.name).startsWith('anon.')&&p.name!==ME.username?`<button class="fchip${FOL.has(p.name)?' on':''}" data-a="fn" data-v="${esc(p.name)}">${FOL.has(p.name)?'following':'follow'}</button>`:'',an=String(p.name).startsWith('anon.'),im=String(p.img).startsWith('data:image/jpeg;base64,')?esc(p.img):'';
+return `<div class="fp"><div class="fh"><span class="ring ${an?'an':'cy'}"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${esc(p.name)}<small>${ago(p.at)}</small></div>${fb0}<button class="fine" data-a="${own?'dp':'rp'}" data-v="${p._id}">${own?'delete':'report'}</button></div><div class="fm" data-a="lk" data-v="${p._id}"><img src="${im}" alt="post photo" loading="lazy">${p.geo?locChip(p.geo):''}<i class="hb">${ic('heart','f')}</i>${p.text?`<b class="cap">${esc(p.text)}</b>`:''}</div><div class="fa"><button data-a="lk" data-v="${p._id}" data-m="${mine?1:0}" class="${mine?'on':''}">${ic('heart',mine?'f':'')}<span>${L.length}</span></button></div></div>`};
 async function vNearby(){const n=VN;ab(SK);let P=[];
 try{const cut=Date.now()-864e5;P=(await listDocs('posts','orderBy=at%20desc&pageSize=10')).filter(p=>p.at&&+new Date(p.at)>cut)}catch(e){}
-const L=await Promise.all(P.map(p=>listDocs('posts/'+p._id+'/likes','pageSize=100').catch(()=>[])));try{MYP=new Set((await listDocs('users/'+ME.uid+'/posts','pageSize=100')).map(x=>x._id))}catch(e){}await loc(false);if(n!==VN)return;
+const L=await Promise.all(P.map(p=>listDocs('posts/'+p._id+'/likes','pageSize=100').catch(()=>[])));try{MYP=new Set((await listDocs('users/'+ME.uid+'/posts','pageSize=100')).map(x=>x._id))}catch(e){}await loadFol();await loc(false);if(n!==VN)return;
 ab(`<div class="hd2"><h3 style="flex:1">nearby</h3><button class="fine" data-a="rf" aria-label="refresh feed" style="text-decoration:underline">refresh</button></div>
 <p class="fine" style="margin:2px 0 12px">posts from early members. gone after 24 hours.</p>`+(P.length?P.map((p,i)=>pcard(p,L[i])).join(''):`<div class="empty2">${ic('pin')}<div>nothing posted yet.</div><button class="btn sm" data-a="newp" style="margin-top:12px">be the first</button></div>`))}
 function prep(f){if(!f)return;const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,720/Math.max(im.width,im.height)),w=Math.round(im.width*k),h=Math.round(im.height*k),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);let q=.75,d=c.toDataURL('image/jpeg',q);while(d.length>150000&&q>.3){q-=.1;d=c.toDataURL('image/jpeg',q)}URL.revokeObjectURL(u);if(d.length>150000||!d.startsWith('data:image/jpeg'))return toast2('that photo won’t shrink enough. try another');PIMG=d;const pv=$('#pv');pv.src=d;pv.hidden=false};im.onerror=()=>toast2('couldn’t read that photo');im.src=u}
@@ -443,14 +471,14 @@ if(t){let q=null;try{q=new URL(t).searchParams}catch(e){}const j=q&&q.get('join'
 const pfpOK=s=>String(s||'').startsWith('data:image/jpeg;base64,');
 const pfpH=(p,c='')=>pfpOK(p&&p.pfp)?`<img class="pfp ${c}" src="${esc(p.pfp)}" alt="">`:`<span class="pfp d ${c}"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span>`;
 function prepP(f){if(!f)return;const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const m=Math.min(im.width,im.height),c=document.createElement('canvas');c.width=c.height=256;c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,256,256);let q=.8,d=c.toDataURL('image/jpeg',q);while(d.length>38000&&q>.3){q-=.1;d=c.toDataURL('image/jpeg',q)}URL.revokeObjectURL(u);if(d.length>38000)return toast2('try a different photo');PFP=d;const e=$('.sh .pfp');if(e){const i=document.createElement('img');i.className='pfp';i.src=d;e.replaceWith(i)}};im.onerror=()=>toast2('couldn’t read that photo');im.src=u}
-async function vYou(){const n=VN;ab(SK);let p=null,F=[],G=[],Q=[];
-[p,F,G,Q]=await Promise.all([getDoc('profiles/'+ME.uid).catch(()=>null),listDocs('users/'+ME.uid+'/followers').catch(()=>[]),listDocs('users/'+ME.uid+'/following').catch(()=>[]),listDocs('users/'+ME.uid+'/posts','pageSize=100').catch(()=>[])]);
-if(n!==VN)return;ME.p=p||{};
-ab(`<div class="pr"><div class="pt">${pfpH(ME.p)}<div class="st3"><button data-a="tab" data-v="you"><b>${Q.length}</b>posts</button><button data-a="tab" data-v="people"><b>${F.length}</b>followers</button><button data-a="tab" data-v="people"><b>${G.length}</b>following</button></div></div>
+async function vYou(){const n=VN;ab(SK);const bad=[],ld=(q,k)=>q.catch(e=>{console.warn('whatspoppin: could not load '+k,e&&e.code||e);bad.push(k);return null});
+const [p,F,G,Q]=await Promise.all([ld(getDoc('profiles/'+ME.uid),'profile'),ld(listDocs('users/'+ME.uid+'/followers'),'followers'),ld(listDocs('users/'+ME.uid+'/following'),'following'),ld(listDocs('users/'+ME.uid+'/posts','pageSize=100'),'posts')]);
+if(n!==VN)return;ME.p=p||ME.p||{};const ct=x=>x===null?'–':x.length>=100?'100+':x.length;
+ab(`<div class="pr"><div class="pt">${pfpH(ME.p)}<div class="st3"><button data-a="tab" data-v="you"><b>${ct(Q)}</b>posts</button><button data-a="tab" data-v="people" data-pt="ers"><b>${ct(F)}</b>followers</button><button data-a="tab" data-v="people" data-pt="ing"><b>${ct(G)}</b>following</button></div></div>
 <h3 style="margin-top:12px">${esc(ME.p.name||ME.username)}</h3><p class="fine">@${esc(ME.username)}${ME.minor?' · under 18':''}</p>${ME.p.bio?`<p class="bio">${esc(ME.p.bio)}</p>`:'<p class="fine" style="margin-top:6px">add a bio so people know who you are.</p>'}
-<div class="duo2" style="margin-top:14px"><button data-a="ep">edit profile</button><button data-a="sh2">share profile</button><button data-a="scan">scan qr</button></div></div>`)}
+<div class="duo2" style="margin-top:14px"><button data-a="ep">edit profile</button><button data-a="sh2">share profile</button><button data-a="scan">scan qr</button></div>${bad.length?`<p class="fine" style="margin-top:14px">couldn’t load your ${bad.join(', ')}. <button class="fine" data-a="rf" style="text-decoration:underline">try again</button></p>`:''}</div>`)}
 async function actItems(){const o=[];
-try{(await listDocs('users/'+ME.uid+'/followers')).forEach(f=>o.push({i:'users',x:'<b>@'+esc(f.username)+'</b> followed you',at:f.at}))}catch(e){}
+try{(await listDocs('users/'+ME.uid+'/followers')).forEach(f=>o.push({i:'users',x:'<b>@'+esc(f.username)+'</b> followed you',at:f.at,go:1}))}catch(e){}
 try{const L=await listDocs('users/'+ME.uid+'/circles');await Promise.all(L.map(async c=>{if(c.role==='owner'){try{(await listDocs('circles/'+c._id+'/members')).filter(m=>m._id!==ME.uid).forEach(m=>o.push({i:'users',x:'someone joined <b>'+esc(c.name)+'</b>',at:m.at}))}catch(e){}}else{try{const P=await listDocs('circles/'+c._id+'/posts','orderBy=at%20desc&pageSize=1');if(P[0])o.push({i:'send',x:'new update in <b>'+esc(c.name)+'</b>: '+esc(String(P[0].text).slice(0,60)),at:P[0].at})}catch(e){}}}))}catch(e){}
 if(!VER)o.push({i:'shield',x:'verify your email to unlock circles, follows and messages',at:new Date().toISOString(),sys:1});
 o.push({i:'flame',x:'you’re in. share your code to climb the list',at:null,sys:1});
@@ -459,7 +487,7 @@ const isNew=a=>a.at&&!a.sys&&+new Date(a.at)>ST.get('wp_seen',0);
 function badge(){const b=$('.abar [data-v=activity]');if(!b)return;let k=$('.bdg',b);if(V.n){if(!k){k=document.createElement('i');k.className='bdg';b.append(k)}k.textContent=V.n}else if(k)k.remove()}
 async function pollAct(){if(!ME)return;try{ACT=await actItems();V.n=ACT.filter(isNew).length;badge()}catch(e){}}
 async function vAct(){const n=VN;ab(SK);const it=await actItems();if(n!==VN)return;
-ab(`<h3 style="margin:6px 0 10px">activity</h3>`+it.map(a=>{const nw=isNew(a);return `<div class="li act${nw?' nw':''}"><span class="ai">${ic(a.i)}</span><div class="bd" style="font-weight:500;text-transform:none">${a.x}<small>${a.at?ago(a.at):'welcome'}</small></div>${nw?'<i class="nd"></i>':''}</div>`}).join(''));
+ab(`<h3 style="margin:6px 0 10px">activity</h3>`+it.map(a=>{const nw=isNew(a);return `<div class="li act${nw?' nw':''}"${a.go?' data-a="tab" data-v="people" data-pt="ers"':''}><span class="ai">${ic(a.i)}</span><div class="bd" style="font-weight:500;text-transform:none">${a.x}<small>${a.at?ago(a.at):'welcome'}</small></div>${nw?'<i class="nd"></i>':''}</div>`}).join(''));
 ST.set('wp_seen',Date.now());V.n=0;badge()}
 {const sp=document.createElement('i');sp.id='sp';document.body.append(sp);addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true})}
 const spc=$('#spc');let V={tab:'you',c:null,dm:null},timer;
@@ -470,19 +498,19 @@ if(!AUTH||!await token())return;
 let u=null;try{u=await getDoc('users/'+AUTH.uid)}catch(x){}
 if(!u){setMode('sign');$('#em').value=AUTH.email||'';$('#pwL').hidden=true;$('#err').className='st ok';$('#err').textContent='almost there. pick a username to finish your account.';return}
 ME={uid:AUTH.uid,username:u.username,code:u.code,r:u.code.slice(4).toLowerCase(),minor:u.minor};try{ME.p=(await getDoc('profiles/'+AUTH.uid))||{}}catch(x){ME.p={}}
-await checkVer();$('#jcard').hidden=true;spc.hidden=false;$('#navp').innerHTML='<span class="dot"></span>@'+esc(ME.username);
+loadFol();await checkVer();$('#jcard').hidden=true;spc.hidden=false;$('#navp').innerHTML='<span class="dot"></span>@'+esc(ME.username);
 V={tab:fresh?'you':'nearby',c:null,dm:null};app();if(fresh)confetti();pollAct();clearInterval(actT);actT=setInterval(()=>{if(V.tab!=='activity')pollAct()},30000);spc.scrollIntoView({behavior:'smooth',block:'center'});
 if(QJ||QF){history.replaceState(null,'',base());ST.set('wp_pend',{t:QJ?'j':'f',c:QJ?clean(QJ):cc(QF)})}runPend()}
-function runPend(){const p=ST.get('wp_pend',null);if(!p||!ME)return;if(!VER)return toast2('verify your email and this will go through');ST.set('wp_pend',null);p.t==='j'?joinCircle(p.c):followCode(p.c)}
+function runPend(){const p=ST.get('wp_pend',null);if(!p||!ME)return;if(!VER)return toast2('verify your email and this will go through');ST.set('wp_pend',null);p.t==='j'?joinCircle(p.c):p.t==='u'?followName(p.c):followCode(p.c)}
 function app(){stop();spc.innerHTML=`<div class="app"><div class="ah"><span class="logo" style="font-size:20px">what’s poppin</span><button class="pill" style="padding:6px 12px" data-a="out">${pfpOK(ME.p&&ME.p.pfp)?`<img class="pp" src="${esc(ME.p.pfp)}" alt="">`:''}@${esc(ME.username)} · log out</button></div>${VER?'':`<div class="ban">verify your email to make circles, follow people and message. <button data-a="ver">i verified</button><button data-a="resend">resend</button></div>`}<div class="ab" id="ab"></div><nav class="abar">${[['nearby','home'],['circles','users'],['post'],['activity','heart'],['you','user']].map(t=>t[0]==='post'?`<button data-a="newp" class="pb" aria-label="post"><span class="pbx">${ic('plus')}</span>post</button>`:`<button data-a="tab" data-v="${t[0]}" class="${V.tab==t[0]||(t[0]==='you'&&(V.tab==='people'||V.tab==='share'))?'on':''}">${ic(t[1])}${t[0]}</button>`).join('')}</nav></div>`;view();badge()}
-function toast2(m){const t=document.createElement('div');t.className='pill tst';t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#fff;color:#000';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)}
+function toast2(m){$$('.tst').forEach(t=>t.remove());const t=document.createElement('div');t.className='pill tst';t.setAttribute('role','status');t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#fff;color:#000;max-width:calc(100vw - 32px);text-align:center';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2600)}
 let VN=0;const cc=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,12);
 const view=()=>{VN++;stop();({share:vShare,nearby:vNearby,activity:vAct,you:vYou,circles:()=>V.c?vCircle():vCircles(),people:()=>V.dm?vDm():vPeople()})[V.tab]()};
 const ab=h=>{$('#ab').innerHTML=h};const SK='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';
 function vShare(){const link=base()+'?follow='+ME.code,pos=ST.get('wp_pos',0);
 ab(`<div class="hd2"><button data-a="tab" data-v="you" aria-label="back">${ic('back')}</button><h3 style="flex:1">share</h3></div><div class="c" style="padding-top:8px"><div style="display:flex;justify-content:center">${pfpH(ME.p||{})}</div><h3 style="margin-top:8px">@${esc(ME.username)}</h3><p class="fine">${ME.minor?'under 18 account · private by default':'early access member'}${pos?' · #'+pos.toLocaleString()+' on the list':''}</p></div>
 <div class="cbox"><small>your access code</small><div class="code">${ME.code}</div><div class="duo2"><button data-a="copy" data-v="${ME.code}">copy code</button><button data-a="copy" data-v="${link}">copy link</button><button data-a="share" data-v="${link}" data-t="follow me on what’s poppin">share</button></div></div>
-<div class="qrb">${qrSvg(link)}</div><p class="fine">scan to follow you. once someone follows you, you can message each other.</p>
+<div class="qrb">${qrSvg(link)}</div><p class="fine">scan to follow you. when you follow each other, you can message.</p>
 <div class="meter"><i id="mt"></i></div><p class="fine"><b id="rf">0</b> of 5 friends joined with your invite · each moves you up 3 spots</p>
 <div class="cbox" style="text-align:left"><small>invite link for the waitlist</small><div class="ref" style="margin-top:8px"><code>${base()}?ref=${ME.r}</code><button class="btn sm" data-a="copy" data-v="${base()}?ref=${ME.r}">copy</button></div></div>`);
 const t=async()=>{const n=await getCount('referrals/'+ME.r);if(n!==null&&$('#rf')){$('#rf').textContent=n;$('#mt').style.width=Math.min(n,5)*20+'%'}};t();every(t,25000)}
@@ -499,18 +527,30 @@ ${own?'':'<div hidden>'}<div class="cbox"><small>circle qr · only members with 
 <div class="msgs" id="feed"></div>
 ${own?`<div class="cmp"><input class="in" id="pm" placeholder="send an update to everyone" maxlength="500"><button data-a="post" aria-label="send">${ic('send')}</button></div>`:`<div class="lockb">${ic('lock')}only ${esc(c.ownerName)} can post here. you can read along.</div><button class="fine" data-a="leave" style="margin:14px auto;display:block;text-decoration:underline">leave circle</button>`}`);
 const f=async()=>{let P=[];try{P=await listDocs('circles/'+code+'/posts','orderBy=at%20desc&pageSize=60')}catch(x){}const el=$('#feed');if(!el)return;el.innerHTML=P.length?[...P].reverse().map(p=>`<div class="bb2">${esc(p.text)}<small>${esc(c.ownerName)} · ${ago(p.at)}</small></div>`).join(''):`<p class="fine" style="text-align:center">${own?'nothing yet. post the first update.':'no updates yet.'}</p>`};f();every(f,5000)}
-async function vPeople(){const n=VN;ab(SK);let a=[],b=[];try{[a,b]=await Promise.all([listDocs('users/'+ME.uid+'/following'),listDocs('users/'+ME.uid+'/followers')])}catch(x){}
-if(n!==VN)return;const row=(p,s)=>`<div class="li" data-a="dm" data-v="${p._id}" data-n="${esc(p.username)}">${avh('')}<div class="bd">@${esc(p.username)}<small>${s}</small></div>${ic('send')}</div>`;
-ab(`<div class="hd2"><button data-a="tab" data-v="you" aria-label="back">${ic('back')}</button><h3 style="flex:1">followers & following</h3></div><div class="cbox" style="text-align:left"><small>follow someone with their code</small><div class="minil" style="margin-top:8px"><input class="in" id="fc2" placeholder="POP-XXXXXX" style="text-transform:uppercase"><button class="btn sm" data-a="fol">follow</button></div></div>
-<p class="fine" style="margin:14px 0 2px">following · tap to message</p>${a.length?a.map(p=>row(p,'you follow them')).join(''):'<p class="fine" style="padding:8px 0">nobody yet.</p>'}
-<p class="fine" style="margin:14px 0 2px">followers</p>${b.length?b.map(p=>row(p,'follows you')).join(''):'<p class="fine" style="padding:8px 0">nobody yet. share your code.</p>'}`)}
+async function vPeople(){const n=VN,pt=V.pt==='ers'?'ers':'ing';ab(SK);let a=null,b=null;
+try{[a,b]=await Promise.all([listDocs('users/'+ME.uid+'/following'),listDocs('users/'+ME.uid+'/followers')])}catch(x){console.warn('whatspoppin: could not load people',x&&x.code||x);if(n===VN)ab(`<div class="empty2">${ic('lock')}<div>couldn’t load your people.<br>check your connection, then try again.</div><button class="btn sm" data-a="rf" style="margin-top:12px">try again</button></div>`);return}
+if(n!==VN)return;const A=new Set(a.map(x=>x._id)),B=new Set(b.map(x=>x._id)),list=pt==='ing'?a:b,cnt=x=>x.length>=100?'100+':x.length;
+await Promise.all(list.slice(0,40).map(async p=>{if(!(p._id in PROF))PROF[p._id]=(await getDoc('profiles/'+p._id).catch(()=>null))||{}}));if(n!==VN)return;
+const row=p=>{const pr=PROF[p._id]||{},mut=A.has(p._id)&&B.has(p._id),q=`data-v="${esc(p._id)}" data-n="${esc(p.username)}"`;
+return `<div class="li"><span data-a="dm" ${q}>${pfpH(pr,'sm')}</span><div class="bd" data-a="dm" ${q}>${esc(pr.name||p.username)}<small>@${esc(p.username)} · ${mut?'friends · tap to message':pt==='ing'?'you follow them':'follows you'}</small></div>${pt==='ing'?`<button class="mb" data-a="unf" ${q}>following</button>`:`${A.has(p._id)?'':`<button class="mb pr" data-a="fb" ${q}>follow back</button>`}<button class="rmx" data-a="rmf" ${q}>remove</button>`}</div>`};
+ab(`<div class="hd2"><button data-a="tab" data-v="you" aria-label="back">${ic('back')}</button><h3 style="flex:1">people</h3></div>
+<div class="minil" style="margin:8px 0 12px"><input class="in" id="fc2" placeholder="@username or POP-XXXXXX" autocapitalize="none" spellcheck="false" maxlength="24"><button class="btn sm" data-a="fol">follow</button></div>
+<div class="tabs2"><button data-a="pt" data-v="ing" class="${pt==='ing'?'on':''}">following · ${cnt(a)}</button><button data-a="pt" data-v="ers" class="${pt==='ers'?'on':''}">followers · ${cnt(b)}</button></div>
+${list.length?list.map(row).join(''):pt==='ing'?`<div class="empty2">${ic('users')}<div>you’re not following anyone yet.<br>search a username above or scan a qr.</div><button class="btn sm" data-a="scan" style="margin-top:12px">scan a qr</button></div>`:`<div class="empty2">${ic('users')}<div>no followers yet.<br>share your profile so people can find you.</div><button class="btn sm" data-a="sh2" style="margin-top:12px">share profile</button></div>`}`)}
 async function vDm(){const n=VN,o=V.dm,pair=[ME.uid,o.uid].sort().join('_');let a=null,b=null;try{[a,b]=await Promise.all([getDoc(`users/${ME.uid}/following/${o.uid}`),getDoc(`users/${ME.uid}/followers/${o.uid}`)])}catch(x){}
 if(n!==VN)return;const ok=!!(a&&b);
-ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><h3 style="flex:1">@${esc(o.name)}</h3></div><div class="msgs" id="thr"></div>${ok?`<div class="cmp"><input class="in" id="dm" placeholder="message" maxlength="1000"><button data-a="send" aria-label="send">${ic('send')}</button></div><p class="st no" id="derr"></p>`:`<div class="lockb">${ic('lock')}${a?'@'+esc(o.name)+' needs to follow you back before you can message.':'follow @'+esc(o.name)+' first. you both need to follow each other to message.'}</div>`}`);
+ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><h3 style="flex:1">@${esc(o.name)}</h3></div><div class="msgs" id="thr"></div>${ok?`<div class="cmp"><input class="in" id="dm" placeholder="message" maxlength="1000"><button data-a="send" aria-label="send">${ic('send')}</button></div><p class="st no" id="derr"></p>`:`<div class="lockb">${ic('lock')}${a?'@'+esc(o.name)+' needs to follow you back before you can message.':'follow @'+esc(o.name)+' first. you both need to follow each other to message.'}</div>${a?'':`<button class="btn sm" data-a="fb" data-v="${esc(o.uid)}" data-n="${esc(o.name)}" style="margin:12px auto 0;display:block">${b?'follow back':'follow'}</button>`}`}`);
 const f=async()=>{let M=[];try{M=await listDocs('dms/'+pair+'/messages','orderBy=at%20desc&pageSize=60')}catch(x){}const el=$('#thr');if(!el)return;el.innerHTML=M.length?[...M].reverse().map(m=>`<div class="bb2 ${m.from===ME.uid?'me':''}">${esc(m.text)}<small>${ago(m.at)}</small></div>`).join(''):'<p class="fine" style="text-align:center">say hi.</p>';el.scrollTop=el.scrollHeight};f();every(f,4000)}
+async function followUser(uid,un){if(!VER){toast2('verify your email first');return false}if(uid===ME.uid){toast2('that’s you');return false}
+try{await commit([W(`users/${ME.uid}/following/${uid}`,{username:Fs(un)},['at']),W(`users/${uid}/followers/${ME.uid}`,{username:Fs(ME.username)},['at'])]);FOL.add(un);toast2('following @'+un);return true}
+catch(x){if(x.code==='ALREADY_EXISTS'){try{await commit([W(`users/${uid}/followers/${ME.uid}`,{username:Fs(ME.username)},['at'])])}catch(e){}FOL.add(un);toast2('you already follow @'+un);return true}
+console.warn('whatspoppin: follow failed',x&&x.code||x,x&&x.message);toast2(x.code==='PERMISSION_DENIED'?'couldn’t follow. verify your email, then try again':'couldn’t follow. try again');return false}}
+async function unfollowUser(uid,un){try{await commit([{delete:nm(`users/${ME.uid}/following/${uid}`)},{delete:nm(`users/${uid}/followers/${ME.uid}`)}]);FOL.delete(un);return true}catch(x){console.warn('whatspoppin: unfollow failed',x&&x.code||x);toast2('couldn’t unfollow. try again');return false}}
+async function removeFollower(uid){try{await commit([{delete:nm(`users/${ME.uid}/followers/${uid}`)},{delete:nm(`users/${uid}/following/${ME.uid}`)}]);return true}catch(x){console.warn('whatspoppin: remove follower failed',x&&x.code||x);toast2('couldn’t remove them. try again');return false}}
 async function followCode(code){code=cc(code);if(!code)return;try{const t=await getDoc('userCodes/'+code);if(!t)return toast2('code not found');if(t.uid===ME.uid)return toast2('that’s your own code');
-await commit([W(`users/${ME.uid}/following/${t.uid}`,{username:Fs(t.username)},['at']),W(`users/${t.uid}/followers/${ME.uid}`,{username:Fs(ME.username)},['at'])]);toast2('following @'+t.username+'. once they follow you back, you can message');V.tab='people';app()}
-catch(x){toast2(x.code==='ALREADY_EXISTS'?'you already follow them':x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t follow. try again')}}
+if(await followUser(t.uid,t.username)){V={tab:'people',c:null,dm:null,pt:'ing'};app()}}catch(x){toast2('couldn’t follow. try again')}}
+async function followName(n){n=String(n||'').trim().toLowerCase().replace(/^@/,'');if(!unOK(n))return toast2('that doesn’t look like a username');const d=await lookUser(n);if(d===undefined)return toast2('couldn’t look that up. try again');if(!d)return toast2('no one’s using @'+n+' yet');if(d.owner===ME.uid)return toast2('that’s you');
+if(await followUser(d.owner,n)){V={tab:'people',c:null,dm:null,pt:'ing'};app()}}
 async function joinCircle(raw){const[r0,k0]=clean(raw).split('.'),code=cc(r0),key=(k0||'').replace(/[^A-Z0-9]/g,'');if(!code)return;if(!key)return toast2('scan the circle’s QR to join');try{const c=await getDoc('circles/'+code);if(!c)return toast2('circle not found');
 await commit([W(`circles/${code}/members/${ME.uid}`,{key:Fs(key)},['at']),W(`users/${ME.uid}/circles/${code}`,{name:Fs(c.name),role:Fs(c.owner===ME.uid?'owner':'member')},['at'])]);toast2('joined '+c.name);V={tab:'circles',c:code,dm:null};app()}
 catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2(x.code==='PERMISSION_DENIED'?'that QR isn’t valid, or verify your email first':'couldn’t join. try again')}}
@@ -528,12 +568,17 @@ try{await commit(on?[W(`posts/${id}/likes/${ME.uid}`,{},['at'])]:[{delete:nm(`po
 const c=+b.querySelector('span').textContent+(on?1:-1);b.dataset.m=on?1:0;b.classList.toggle('on',on);b.innerHTML=ic('heart',on?'f':'')+'<span>'+Math.max(0,c)+'</span>';m.classList.remove('pop');if(on){void m.offsetWidth;m.classList.add('pop')}},
 async dp(d){if(!confirm('delete this post?'))return;try{await commit([{delete:nm('posts/'+d.v)},{delete:nm(`users/${ME.uid}/posts/${d.v}`)}]);view()}catch(x){toast2('couldn’t delete')}},
 async rp(d){try{await commit([W('reports/'+rand(12),{post:Fs(d.v),by:Fs(ME.uid)},['at'])]);toast2('reported. thanks for flagging it')}catch(x){toast2('verify your email first')}},
-tab:d=>{V={tab:d.v,c:null,dm:null};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
+tab:d=>{V={tab:d.v,c:null,dm:null,pt:d.pt||'ing'};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
 newc:()=>{$('#nc').hidden=!$('#nc').hidden},
+pt:d=>{V.pt=d.v;view()},
+async unf(d){if(!confirm('unfollow @'+d.n+'?'))return;if(await unfollowUser(d.v,d.n)){toast2('unfollowed @'+d.n);view()}},
+async fb(d){if(await followUser(d.v,d.n))view()},
+async rmf(d){if(!confirm('remove @'+d.n+' from your followers?'))return;if(await removeFollower(d.v)){toast2('removed');view()}},
+async fn(d){const un=d.v,x=await lookUser(un);if(!x)return toast2('couldn’t find @'+un);if(FOL.has(un))await unfollowUser(x.owner,un);else await followUser(x.owner,un);$$('.fchip').filter(b=>b.dataset.v===un).forEach(b=>{const on=FOL.has(un);b.classList.toggle('on',on);b.textContent=on?'following':'follow'})},
 async mk(){const name=$('#cn').value.trim(),desc=$('#cd').value.trim();if(name.length<2)return toast2('give it a name');const code='CIR-'+rand(6).toUpperCase(),key=rand(10).toUpperCase();
 try{await commit([W('circles/'+code,{name:Fs(name),desc:Fs(desc),owner:Fs(ME.uid),ownerName:Fs(ME.username)},['createdAt']),W(`circles/${code}/members/${ME.uid}`,{key:Fs(key)},['at']),W(`circles/${code}/private/key`,{key:Fs(key)}),W(`users/${ME.uid}/circles/${code}`,{name:Fs(name),role:Fs('owner')},['at'])]);V.c=code;view();confetti()}
 catch(x){toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t create it. try again')}},
-join:()=>{const c=($('#jc').value||'').trim().toUpperCase();if(c)joinCircle(c)},fol:()=>{const c=($('#fc2').value||'').trim().toUpperCase();if(c)followCode(c)},
+join:()=>{const c=($('#jc').value||'').trim().toUpperCase();if(c)joinCircle(c)},fol:()=>{const c=($('#fc2').value||'').trim();if(!c)return;$('#fc2').value='';/^pop-/i.test(c)?followCode(c):followName(c)},
 async post(){const t=$('#pm').value.trim();if(!t)return;try{await commit([W(`circles/${V.c}/posts/${rand(10)}`,{text:Fs(t),by:Fs(ME.uid)},['at'])]);$('#pm').value='';view()}catch(x){toast2('couldn’t post. verify your email first.')}},
 async send(){const t=$('#dm').value.trim();if(!t)return;const o=V.dm,pair=[ME.uid,o.uid].sort().join('_');try{await commit([W(`dms/${pair}/messages/${rand(10)}`,{text:Fs(t),from:Fs(ME.uid)},['at'])]);$('#dm').value='';$('#derr').textContent='';view()}catch(x){$('#derr').textContent=x.code==='PERMISSION_DENIED'?'you both need to follow each other, and verify your email, to message.':'couldn’t send.'}},
 async leave(){try{await commit([{delete:nm(`circles/${V.c}/members/${ME.uid}`)},{delete:nm(`users/${ME.uid}/circles/${V.c}`)}]);V.c=null;view()}catch(x){toast2('couldn’t leave')}},
