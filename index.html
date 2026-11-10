@@ -202,7 +202,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 
 <article class="card c2 rv"><span class="tag cy"><svg class="i" style="width:14px;height:14px"><use href="#shield"/></svg>safety</span>
 <h3>built for a night out, not a lawsuit.</h3>
-<ul class="safe"><li><svg class="i"><use href="#shield"/></svg><span><b>under 18?</b> private by default, circle-only dms.</span></li><li><svg class="i"><use href="#flag"/></svg><span><b>report and block</b> on every post and message.</span></li><li><svg class="i"><use href="#clock"/></svg><span><b>24-hour posts.</b> location info vanishes with them.</span></li><li><svg class="i"><use href="#eye"/></svg><span><b>anonymous to people,</b> not to moderators.</span></li></ul></article>
+<ul class="safe"><li><svg class="i"><use href="#shield"/></svg><span><b>under 18?</b> private by default, dms only from people they follow back.</span></li><li><svg class="i"><use href="#flag"/></svg><span><b>report and block</b> on every post and message.</span></li><li><svg class="i"><use href="#clock"/></svg><span><b>24-hour posts.</b> location info vanishes with them.</span></li><li><svg class="i"><use href="#eye"/></svg><span><b>anonymous to people,</b> not to moderators.</span></li></ul></article>
 </div></div></section>
 
 <section style="padding-top:20px"><div class="wrap">
@@ -242,7 +242,7 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 <section style="padding-top:20px"><div class="wrap"><h2 class="rv" style="font-size:clamp(32px,4.4vw,54px)">questions.</h2><div style="margin-top:26px;max-width:880px">
 <details class="rv"><summary>can people see exactly where i am?</summary><p>no. everyone only ever sees a shaded area about a third of a mile wide. private addresses are never shown, and location info expires with your post.</p></details>
 <details class="rv"><summary>if i post anonymously, am i untraceable?</summary><p>anonymous to other people, yes. but the platform keeps account ownership on the back end so moderators can act on abuse and harassment.</p></details>
-<details class="rv"><summary>who can use it?</summary><p>13 and up. accounts under 18 start private, only their circle can message them, and their location stays blurred.</p></details>
+<details class="rv"><summary>who can use it?</summary><p>13 and up. accounts under 18 start private, only mutual follows can message them, and their location stays blurred.</p></details>
 <details class="rv"><summary>what does it cost?</summary><p>free. early members get their username locked and a head start in their city.</p></details>
 </div></div></section>
 <footer><div class="wrap"><span class="logo" style="font-size:20px">what’s poppin</span><span>© 2026 what’s poppin · built for good nights</span><span>privacy · terms · safety</span></div></footer>
@@ -356,10 +356,12 @@ if(!u){setMode('sign');$('#em').value=AUTH.email||'';$('#pwL').hidden=true;$('#e
 ME={uid:AUTH.uid,username:u.username,code:u.code,r:u.code.slice(4).toLowerCase(),minor:u.minor};
 await checkVer();$('#jcard').hidden=true;spc.hidden=false;$('#navp').innerHTML='<span class="dot"></span>@'+esc(ME.username);
 V={tab:'you',c:null,dm:null};app();if(fresh)confetti();spc.scrollIntoView({behavior:'smooth',block:'center'});
-if(QJ){const c=QJ.toUpperCase();history.replaceState(null,'',base());joinCircle(c)}else if(QF){const c=QF.toUpperCase();history.replaceState(null,'',base());followCode(c)}}
+if(QJ||QF){history.replaceState(null,'',base());ST.set('wp_pend',{t:QJ?'j':'f',c:cc(QJ||QF)})}runPend()}
+function runPend(){const p=ST.get('wp_pend',null);if(!p||!ME)return;if(!VER)return toast2('verify your email and this will go through');ST.set('wp_pend',null);p.t==='j'?joinCircle(p.c):followCode(p.c)}
 function app(){stop();spc.innerHTML=`<div class="app"><div class="ah"><span class="logo" style="font-size:20px">what’s poppin</span><button class="pill" style="padding:6px 12px" data-a="out">@${esc(ME.username)} · log out</button></div>${VER?'':`<div class="ban">verify your email to make circles, follow people and message. <button data-a="ver">i verified</button><button data-a="resend">resend</button></div>`}<div class="ab" id="ab"></div><nav class="abar">${[['you','user'],['circles','users'],['people','send']].map(t=>`<button data-a="tab" data-v="${t[0]}" class="${V.tab==t[0]?'on':''}">${ic(t[1])}${t[0]}</button>`).join('')}</nav></div>`;view()}
 function toast2(m){const t=document.createElement('div');t.className='pill';t.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#fff;color:#000';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)}
-const view=()=>{stop();({you:vYou,circles:()=>V.c?vCircle():vCircles(),people:()=>V.dm?vDm():vPeople()})[V.tab]()};
+let VN=0;const cc=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,12);
+const view=()=>{VN++;stop();({you:vYou,circles:()=>V.c?vCircle():vCircles(),people:()=>V.dm?vDm():vPeople()})[V.tab]()};
 const ab=h=>{$('#ab').innerHTML=h};
 function vYou(){const link=base()+'?follow='+ME.code,pos=ST.get('wp_pos',0);
 ab(`<div class="c" style="padding-top:8px">${avh()}<h3 style="margin-top:8px">@${esc(ME.username)}</h3><p class="fine">${ME.minor?'under 18 account · private by default':'early access member'}${pos?' · #'+pos.toLocaleString()+' on the list':''}</p></div>
@@ -368,33 +370,34 @@ ab(`<div class="c" style="padding-top:8px">${avh()}<h3 style="margin-top:8px">@$
 <div class="meter"><i id="mt"></i></div><p class="fine"><b id="rf">0</b> of 5 friends joined with your invite · each moves you up 3 spots</p>
 <div class="cbox" style="text-align:left"><small>invite link for the waitlist</small><div class="ref" style="margin-top:8px"><code>${base()}?ref=${ME.r}</code><button class="btn sm" data-a="copy" data-v="${base()}?ref=${ME.r}">copy</button></div></div>`);
 const t=async()=>{const n=await getCount('referrals/'+ME.r);if(n!==null&&$('#rf')){$('#rf').textContent=n;$('#mt').style.width=Math.min(n,5)*20+'%'}};t();every(t,25000)}
-async function vCircles(){ab('<p class="fine" style="padding:20px 0">loading…</p>');let L=[];try{L=await listDocs('users/'+ME.uid+'/circles')}catch(x){}
-ab(`<div class="hd2"><h3 style="flex:1">circles</h3><button class="btn sm" data-a="newc">make one</button></div>
+async function vCircles(){const n=VN;ab('<p class="fine" style="padding:20px 0">loading…</p>');let L=[];try{L=await listDocs('users/'+ME.uid+'/circles')}catch(x){}
+if(n!==VN)return;ab(`<div class="hd2"><h3 style="flex:1">circles</h3><button class="btn sm" data-a="newc">make one</button></div>
 <div id="nc" hidden class="cbox" style="text-align:left"><input class="in" id="cn" placeholder="name it anything" maxlength="40" style="margin-bottom:8px"><input class="in" id="cd" placeholder="what’s it for? (optional)" maxlength="140" style="margin-bottom:10px"><button class="btn sm" data-a="mk" style="width:100%">create circle</button></div>
 ${L.length?L.map(c=>`<div class="li" data-a="open" data-v="${c._id}"><span class="ring ${c.role=='owner'?'an':'cy'}"><span class="av s" style="background:#3b3a4a"><svg viewBox="0 0 24 24"><use href="#ppl"/></svg></span></span><div class="bd">${esc(c.name)}<small>${c.role=='owner'?'you own this':'following along'} · ${esc(c._id)}</small></div></div>`).join(''):'<p class="fine" style="padding:16px 0">no circles yet. make one, or join with a code.</p>'}
 <div class="cbox" style="text-align:left"><small>have a circle code?</small><div class="minil" style="margin-top:8px"><input class="in" id="jc" placeholder="CIR-XXXXXX" style="text-transform:uppercase"><button class="btn sm" data-a="join">join</button></div></div>`)}
-async function vCircle(){const code=V.c;ab('<p class="fine" style="padding:20px 0">loading…</p>');let c=null;try{c=await getDoc('circles/'+code)}catch(x){}
-if(!c){V.c=null;return vCircles()}const own=c.owner===ME.uid,link=base()+'?join='+code;
+async function vCircle(){const n=VN,code=V.c;ab('<p class="fine" style="padding:20px 0">loading…</p>');let c=null;try{c=await getDoc('circles/'+code)}catch(x){}
+if(n!==VN)return;if(!c){V.c=null;return vCircles()}const own=c.owner===ME.uid,link=base()+'?join='+code;
 ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><div style="flex:1"><h3>${esc(c.name)}</h3><p class="fine">${own?'you own this':'owner · @'+esc(c.ownerName)}${c.desc?' · '+esc(c.desc):''}</p></div></div>
 <div class="cbox"><small>circle code</small><div class="code" style="font-size:26px">${esc(code)}</div><div class="duo2"><button data-a="copy" data-v="${esc(code)}">copy code</button><button data-a="copy" data-v="${esc(link)}">copy link</button><button data-a="share" data-v="${esc(link)}" data-t="join ${esc(c.name)} on what’s poppin">share</button></div></div>
 <div class="qrb" style="width:150px">${qrSvg(link)}</div><p class="fine">scan to join</p>
 <div class="msgs" id="feed"></div>
 ${own?`<div class="cmp"><input class="in" id="pm" placeholder="send an update to everyone" maxlength="500"><button data-a="post" aria-label="send">${ic('send')}</button></div>`:`<div class="lockb">${ic('lock')}only ${esc(c.ownerName)} can post here. you can read along.</div><button class="fine" data-a="leave" style="margin:14px auto;display:block;text-decoration:underline">leave circle</button>`}`);
 const f=async()=>{let P=[];try{P=await listDocs('circles/'+code+'/posts','orderBy=at%20desc&pageSize=60')}catch(x){}const el=$('#feed');if(!el)return;el.innerHTML=P.length?[...P].reverse().map(p=>`<div class="bb2">${esc(p.text)}<small>${esc(c.ownerName)} · ${ago(p.at)}</small></div>`).join(''):`<p class="fine" style="text-align:center">${own?'nothing yet. post the first update.':'no updates yet.'}</p>`};f();every(f,5000)}
-async function vPeople(){ab('<p class="fine" style="padding:20px 0">loading…</p>');let a=[],b=[];try{[a,b]=await Promise.all([listDocs('users/'+ME.uid+'/following'),listDocs('users/'+ME.uid+'/followers')])}catch(x){}
-const row=(p,s)=>`<div class="li" data-a="dm" data-v="${p._id}" data-n="${esc(p.username)}">${avh('')}<div class="bd">@${esc(p.username)}<small>${s}</small></div>${ic('send')}</div>`;
+async function vPeople(){const n=VN;ab('<p class="fine" style="padding:20px 0">loading…</p>');let a=[],b=[];try{[a,b]=await Promise.all([listDocs('users/'+ME.uid+'/following'),listDocs('users/'+ME.uid+'/followers')])}catch(x){}
+if(n!==VN)return;const row=(p,s)=>`<div class="li" data-a="dm" data-v="${p._id}" data-n="${esc(p.username)}">${avh('')}<div class="bd">@${esc(p.username)}<small>${s}</small></div>${ic('send')}</div>`;
 ab(`<h3 style="margin:6px 0 10px">people</h3><div class="cbox" style="text-align:left"><small>follow someone with their code</small><div class="minil" style="margin-top:8px"><input class="in" id="fc2" placeholder="POP-XXXXXX" style="text-transform:uppercase"><button class="btn sm" data-a="fol">follow</button></div></div>
 <p class="fine" style="margin:14px 0 2px">following · tap to message</p>${a.length?a.map(p=>row(p,'you follow them')).join(''):'<p class="fine" style="padding:8px 0">nobody yet.</p>'}
 <p class="fine" style="margin:14px 0 2px">followers</p>${b.length?b.map(p=>row(p,'follows you')).join(''):'<p class="fine" style="padding:8px 0">nobody yet. share your code.</p>'}`)}
-async function vDm(){const o=V.dm,pair=[ME.uid,o.uid].sort().join('_');
-ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><h3 style="flex:1">@${esc(o.name)}</h3></div><div class="msgs" id="thr"></div><div class="cmp"><input class="in" id="dm" placeholder="message" maxlength="1000"><button data-a="send" aria-label="send">${ic('send')}</button></div><p class="st no" id="derr"></p>`);
+async function vDm(){const n=VN,o=V.dm,pair=[ME.uid,o.uid].sort().join('_');let a=null,b=null;try{[a,b]=await Promise.all([getDoc(`users/${ME.uid}/following/${o.uid}`),getDoc(`users/${ME.uid}/followers/${o.uid}`)])}catch(x){}
+if(n!==VN)return;const ok=!!(a&&b);
+ab(`<div class="hd2"><button data-a="back" aria-label="back">${ic('back')}</button><h3 style="flex:1">@${esc(o.name)}</h3></div><div class="msgs" id="thr"></div>${ok?`<div class="cmp"><input class="in" id="dm" placeholder="message" maxlength="1000"><button data-a="send" aria-label="send">${ic('send')}</button></div><p class="st no" id="derr"></p>`:`<div class="lockb">${ic('lock')}${a?'@'+esc(o.name)+' needs to follow you back before you can message.':'follow @'+esc(o.name)+' first. you both need to follow each other to message.'}</div>`}`);
 const f=async()=>{let M=[];try{M=await listDocs('dms/'+pair+'/messages','orderBy=at%20desc&pageSize=60')}catch(x){}const el=$('#thr');if(!el)return;el.innerHTML=M.length?[...M].reverse().map(m=>`<div class="bb2 ${m.from===ME.uid?'me':''}">${esc(m.text)}<small>${ago(m.at)}</small></div>`).join(''):'<p class="fine" style="text-align:center">say hi.</p>';el.scrollTop=el.scrollHeight};f();every(f,4000)}
-async function followCode(code){try{const t=await getDoc('userCodes/'+code);if(!t)return toast2('code not found');if(t.uid===ME.uid)return toast2('that’s your own code');
-await commit([W(`users/${ME.uid}/following/${t.uid}`,{username:Fs(t.username)},['at']),W(`users/${t.uid}/followers/${ME.uid}`,{username:Fs(ME.username)},['at'])]);toast2('following @'+t.username+'. you can message them now');V.tab='people';app()}
+async function followCode(code){code=cc(code);if(!code)return;try{const t=await getDoc('userCodes/'+code);if(!t)return toast2('code not found');if(t.uid===ME.uid)return toast2('that’s your own code');
+await commit([W(`users/${ME.uid}/following/${t.uid}`,{username:Fs(t.username)},['at']),W(`users/${t.uid}/followers/${ME.uid}`,{username:Fs(ME.username)},['at'])]);toast2('following @'+t.username+'. once they follow you back, you can message');V.tab='people';app()}
 catch(x){toast2(x.code==='ALREADY_EXISTS'?'you already follow them':x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t follow. try again')}}
-async function joinCircle(code){try{const c=await getDoc('circles/'+code);if(!c)return toast2('circle not found');
+async function joinCircle(code){code=cc(code);if(!code)return;try{const c=await getDoc('circles/'+code);if(!c)return toast2('circle not found');
 await commit([W(`circles/${code}/members/${ME.uid}`,{},['at']),W(`users/${ME.uid}/circles/${code}`,{name:Fs(c.name),role:Fs(c.owner===ME.uid?'owner':'member')},['at'])]);toast2('joined '+c.name);V={tab:'circles',c:code,dm:null};app()}
-catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2('couldn’t join. try again')}}
+catch(x){if(x.code==='ALREADY_EXISTS'){V={tab:'circles',c:code,dm:null};app()}else toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t join. try again')}}
 const acts={
 tab:d=>{V={tab:d.v,c:null,dm:null};app()},back:()=>{V.c=null;V.dm=null;view()},open:d=>{V.c=d.v;view()},dm:d=>{V.dm={uid:d.v,name:d.n};view()},
 newc:()=>{$('#nc').hidden=!$('#nc').hidden},
@@ -403,11 +406,11 @@ try{await commit([W('circles/'+code,{name:Fs(name),desc:Fs(desc),owner:Fs(ME.uid
 catch(x){toast2(x.code==='PERMISSION_DENIED'?'verify your email first':'couldn’t create it. try again')}},
 join:()=>{const c=($('#jc').value||'').trim().toUpperCase();if(c)joinCircle(c)},fol:()=>{const c=($('#fc2').value||'').trim().toUpperCase();if(c)followCode(c)},
 async post(){const t=$('#pm').value.trim();if(!t)return;try{await commit([W(`circles/${V.c}/posts/${rand(10)}`,{text:Fs(t),by:Fs(ME.uid)},['at'])]);$('#pm').value='';view()}catch(x){toast2('couldn’t post. verify your email first.')}},
-async send(){const t=$('#dm').value.trim();if(!t)return;const o=V.dm,pair=[ME.uid,o.uid].sort().join('_');try{await commit([W(`dms/${pair}/messages/${rand(10)}`,{text:Fs(t),from:Fs(ME.uid)},['at'])]);$('#dm').value='';$('#derr').textContent='';view()}catch(x){$('#derr').textContent=x.code==='PERMISSION_DENIED'?'you need to follow each other, and verify your email, to message.':'couldn’t send.'}},
+async send(){const t=$('#dm').value.trim();if(!t)return;const o=V.dm,pair=[ME.uid,o.uid].sort().join('_');try{await commit([W(`dms/${pair}/messages/${rand(10)}`,{text:Fs(t),from:Fs(ME.uid)},['at'])]);$('#dm').value='';$('#derr').textContent='';view()}catch(x){$('#derr').textContent=x.code==='PERMISSION_DENIED'?'you both need to follow each other, and verify your email, to message.':'couldn’t send.'}},
 async leave(){try{await commit([{delete:nm(`circles/${V.c}/members/${ME.uid}`)},{delete:nm(`users/${ME.uid}/circles/${V.c}`)}]);V.c=null;view()}catch(x){toast2('couldn’t leave')}},
 async copy(d){try{await navigator.clipboard.writeText(d.v);toast2('copied')}catch(x){toast2('press and hold to copy')}},
 share:d=>navigator.share?navigator.share({title:'what’s poppin',text:d.t,url:d.v}).catch(()=>{}):acts.copy(d),
-async ver(){toast2((await checkVer())?'verified. you’re good.':'not verified yet. open the email link first.');if(VER)app()},
+async ver(){toast2((await checkVer())?'verified. you’re good.':'not verified yet. open the email link first.');if(VER){app();runPend()}},
 async resend(){await sendVerify();toast2('sent again')},
 out:()=>{stop();AUTH=null;ME=null;ST.set('wp_auth',null);location.href=base()}};
 spc.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&acts[b.dataset.a])acts[b.dataset.a](b.dataset)});
