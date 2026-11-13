@@ -257,6 +257,31 @@ footer{border-top:1px solid var(--s3);padding:44px 0 60px;color:var(--mu);font-s
 .fa button.on svg{animation:hrt .4s var(--e)}.abar .on svg{animation:bnc .4s var(--e)}.ab.chat .bb2:last-child{animation:bin .25s var(--e)}
 .stp:not(.seen) img{animation:rng 2.6s ease-in-out infinite}.ccard,.li.lr{animation:up2 .4s var(--e) both}
 .btn,.duo2 button,.abar button,.chips button,.ftabs button,.ccard{transition:transform .12s,background .2s,border-color .2s}.btn:active,.duo2 button:active,.abar button:active,.ccard:active{transform:scale(.96)}
+
+/* ---- signed-in layout: only the app, sized for the device ---- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.in,html.in body{height:100%;overflow:hidden;overscroll-behavior:none}
+html.in body{background:radial-gradient(80% 60% at 50% -10%,rgba(139,92,246,.24),transparent 70%),radial-gradient(60% 50% at 50% 115%,rgba(34,211,238,.10),transparent 70%),#000}
+html.in nav,html.in .glow,html.in .hero,html.in .tick,html.in .stage,html.in footer,html.in section:not(#join),html.in #jcard{display:none!important}
+html.in #join{position:fixed;inset:0;padding:0!important;display:grid;place-items:center}
+html.in #join>.wrap{padding:0!important;width:100%;height:100%;display:grid;place-items:center;max-width:none}
+html.in #spc{display:grid;place-items:center;width:100%;height:100%}
+html.in #spc[hidden]{display:none}
+/* phone-frame on tablets and desktops */
+html.in .app{width:min(calc(100vw - 32px),440px)!important;height:min(900px,calc(100dvh - 32px))!important;aspect-ratio:auto!important;max-width:none!important;margin:0;border-radius:36px;border:1px solid var(--s3);box-shadow:0 40px 90px -30px rgba(139,92,246,.55),0 0 0 8px #0b0b0e}
+/* real phones (and landscape phones): full bleed, honouring the notch and home bar */
+@media(max-width:520px),(max-height:520px){
+ html.in .app{width:100vw!important;height:100dvh!important;border-radius:0;border:0;box-shadow:none}
+ html.in .ah{padding-top:calc(env(safe-area-inset-top,0px) + 10px)}
+ html.in .abar{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 8px)}
+}
+html.in .ah{padding:14px 20px 10px;min-height:64px;flex:none}
+html.in .ah .logo{font-size:23px;white-space:nowrap}
+html.in .ahr{flex:none}
+html.in .ab{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-left:20px;padding-right:20px}
+html.in .abar{flex:none}
+.app input,.app textarea,.app select{font-size:16px}
+@media(max-width:360px){html.in .ah{padding-left:14px;padding-right:14px}html.in .ah .logo{font-size:20px}html.in .ab{padding-left:14px;padding-right:14px}html.in .ftabs,html.in .fp{margin-left:-14px;margin-right:-14px}}
 </style><script>try{var _a=localStorage.getItem('wp_auth');if(_a&&_a!=='null')document.documentElement.className+=' in'}catch(e){}</script></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="bell" viewBox="0 0 24 24"><path d="M6 17v-6a6 6 0 0112 0v6l1.5 2h-15zM10 21.5a2 2 0 004 0"/></symbol><symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol><symbol id="dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></symbol><symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol><symbol id="chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.5 7.2L4 20l1-4.5A8 8 0 1121 12z"/></symbol><symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></symbol><symbol id="flip" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0113.7-5.6L20 8M20 4v4h-4M20 12a8 8 0 01-13.7 5.6L4 16M4 20v-4h4"/></symbol><symbol id="ppl" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 24c0-5.5 4-8.5 8.5-8.5s8.5 3 8.5 8.5z"/></symbol>
