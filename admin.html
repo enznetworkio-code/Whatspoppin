@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>poppin moderation</title>
+<style>
+:root{--bg:#000;--card:#0f0f11;--field:#18181b;--line:#27272a;--text:#fff;--gray:#9a9aa3;--purple:#8b5cf6;--red:#ff3b5c;--cyan:#22d3ee}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:26px;letter-spacing:-.6px;margin:8px 0 4px}
+.sub{color:var(--gray);margin:0 0 18px;font-size:14px}
+input{width:100%;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--field);color:#fff;padding:0 14px;font-size:16px;margin-bottom:10px}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:10px 18px;font-weight:700;color:#fff;background:var(--purple)}
+button.ghost{background:var(--field);border:1px solid var(--line)}
+button.danger{background:var(--red)}
+button:disabled{opacity:.5;cursor:default}
+.err{color:var(--red);font-size:13px;min-height:18px;margin:6px 0}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:16px}
+.card img{display:block;width:100%;max-height:420px;object-fit:contain;background:#000}
+.body{padding:14px 16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-block;background:var(--field);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--gray)}
+.pill.hot{color:#fff;background:var(--red);border-color:var(--red)}
+.meta{color:var(--gray);font-size:13px;margin:6px 0}
+.actions{display:flex;gap:10px;margin-top:12px}
+.empty{text-align:center;color:var(--gray);padding:60px 0}
+code{background:var(--field);padding:2px 6px;border-radius:6px;font-size:12px;word-break:break-all}
+.gone{padding:14px 16px;color:var(--gray)}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const FB={key:"AIzaSyBXCqCuNjH_wy5hMwMJydH9z65Va90pzT4",proj:"whatspoppin-161cf"};
+const DB=`https://firestore.googleapis.com/v1/projects/${FB.proj}/databases/(default)/documents`;
+const $=document.getElementById('app');
+let TOKEN=null,UID=null;
+
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fv=(d,k)=>{const v=d&&d.fields&&d.fields[k];return v?(v.stringValue??v.timestampValue??null):null};
+const idOf=d=>String(d.name||'').split('/').pop();
+const ago=iso=>{if(!iso)return'';const s=Math.max(0,(Date.now()-new Date(iso))/1000);return s<60?'now':s<3600?Math.floor(s/60)+'m ago':s<86400?Math.floor(s/3600)+'h ago':Math.floor(s/86400)+'d ago'};
+
+async function api(method,path,body){
+  const r=await fetch(`${DB}/${path}${path.includes('?')?'&':'?'}key=${FB.key}`,{method,headers:{'Content-Type':'application/json',...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})},body:body?JSON.stringify(body):undefined});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const e=new Error(j.error&&j.error.status||'ERROR');e.status=e.message;throw e}
+  return j;
+}
+
+function login(msg=''){
+  $.innerHTML=`<h1>poppin moderation</h1><p class="sub">moderators only. sign in with your account email and password.</p>
+  <input id="em" type="email" placeholder="email" autocomplete="username"><input id="pw" type="password" placeholder="password" autocomplete="current-password">
+  <div class="err" id="er">${esc(msg)}</div><button id="go">sign in</button>`;
+  const go=async()=>{
+    const er=document.getElementById('er'),b=document.getElementById('go');er.textContent='';b.disabled=true;
+    try{
+      const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FB.key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('em').value.trim(),password:document.getElementById('pw').value,returnSecureToken:true})});
+      const j=await r.json();if(!r.ok)throw new Error('wrong email or password');
+      TOKEN=j.idToken;UID=j.localId;
+      try{await api('GET','admins/'+UID)}catch(e){TOKEN=null;UID=null;throw new Error('this account is not a moderator')}
+      queue();
+    }catch(e){er.textContent=e.message;b.disabled=false}
+  };
+  document.getElementById('go').onclick=go;
+  document.getElementById('pw').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+
+async function queue(){
+  $.innerHTML=`<div class="bar"><h1>reports</h1><button class="ghost" id="rf">refresh</button></div><p class="sub">loading...</p>`;
+  document.getElementById('rf').onclick=queue;
+  let docs=[];
+  try{docs=(await api('GET','reports?orderBy=at%20desc&pageSize=200')).documents||[]}
+  catch(e){if(e.status==='UNAUTHENTICATED'||e.status==='PERMISSION_DENIED')return login('session expired. sign in again.');
+    $.querySelector('.sub').textContent='could not load reports ('+e.status.toLowerCase()+')';return}
+
+  // one card per reported post
+  const groups=new Map();
+  for(const d of docs){
+    const post=fv(d,'post'),circle=fv(d,'circle')||'',k=circle+'/'+post;
+    if(!groups.has(k))groups.set(k,{post,circle,reports:[]});
+    groups.get(k).reports.push({id:idOf(d),by:fv(d,'by'),reason:fv(d,'reason')||'no reason given',at:fv(d,'at')});
+  }
+  const list=[...groups.values()].sort((a,b)=>b.reports.length-a.reports.length);
+
+  $.innerHTML=`<div class="bar"><h1>reports</h1><button class="ghost" id="rf">refresh</button></div>
+  <p class="sub">${list.length?`${list.length} reported post${list.length===1?'':'s'}, most reported first`:''}</p><div id="list"></div>`;
+  document.getElementById('rf').onclick=queue;
+  const box=document.getElementById('list');
+  if(!list.length){box.innerHTML='<div class="empty">nothing to review. all clear.</div>';return}
+  for(const g of list){const el=document.createElement('div');el.className='card';box.appendChild(el);render(el,g)}
+}
+
+async function render(el,g){
+  const path=g.circle?`circles/${g.circle}/photos/${g.post}`:`posts/${g.post}`;
+  let post=null;
+  try{post=await api('GET',path)}catch(e){if(e.status!=='NOT_FOUND')post=undefined}
+  const reasons={};g.reports.forEach(r=>reasons[r.reason]=(reasons[r.reason]||0)+1);
+  const reasonPills=Object.entries(reasons).map(([k,v])=>`<span class="pill">${esc(k)}${v>1?' ×'+v:''}</span>`).join(' ');
+  const reporters=new Set(g.reports.map(r=>r.by)).size;
+  const head=`<div class="row"><span class="pill hot">${reporters} report${reporters===1?'':'s'}</span>${g.circle?'<span class="pill">circle photo</span>':''}${reasonPills}</div>`;
+
+  let owner='';
+  if(post){
+    const name=fv(post,'name');
+    if(name&&!/^anon\.\d{4}$/.test(name)){
+      try{const u=await api('GET','usernames/'+name);owner=`account id <code>${esc(idOf({name:u.fields.owner.stringValue}))}</code> (to ban: Firebase console → Authentication → search this id → disable)`}catch(e){owner='account not found (maybe already deleted)'}
+    }else owner='anonymous post. the owner is not stored on it.';
+  }
+
+  if(post===null){
+    el.innerHTML=`<div class="body">${head}</div><div class="gone">this post is already gone (expired or deleted).</div><div class="body"><div class="actions"><button class="ghost" data-a="dismiss">clear report</button></div></div>`;
+  }else if(post===undefined){
+    el.innerHTML=`<div class="body">${head}<p class="meta">couldn't load this post.</p></div>`;
+  }else{
+    el.innerHTML=`<img src="${esc(fv(post,'img'))}" alt="reported photo"><div class="body">${head}
+      <p style="margin:10px 0 2px"><b>${esc(fv(post,'name'))}</b> ${fv(post,'text')?'· '+esc(fv(post,'text')):''}</p>
+      <p class="meta">posted ${esc(ago(fv(post,'at')))} · first report ${esc(ago(g.reports[g.reports.length-1].at))}</p>
+      <p class="meta">${owner}</p>
+      <div class="actions"><button class="danger" data-a="remove">remove post</button><button class="ghost" data-a="dismiss">dismiss reports</button></div></div>`;
+  }
+  el.querySelectorAll('button[data-a]').forEach(b=>b.onclick=async()=>{
+    const act=b.dataset.a;
+    if(act==='remove'&&!confirm('remove this post for everyone?'))return;
+    el.querySelectorAll('button').forEach(x=>x.disabled=true);
+    try{
+      if(act==='remove')await api('DELETE',path);
+      for(const r of g.reports)await api('DELETE','reports/'+r.id);
+      el.innerHTML=`<div class="gone">${act==='remove'?'post removed and reports cleared.':'reports dismissed.'}</div>`;
+    }catch(e){alert('failed: '+e.status.toLowerCase());el.querySelectorAll('button').forEach(x=>x.disabled=false)}
+  });
+}
+
+login();
+</script>
+</body>
+</html>
